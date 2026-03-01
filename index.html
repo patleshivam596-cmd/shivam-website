@@ -1,13 +1,238 @@
-index.html       → Home page (game hub menu)
-tictactoe.html   → Tic Tac Toe game
-puzzle.html      → Number Puzzle game
-guess.html       → Guess the Number game
-rps.html         → Rock Paper Scissors
-memory.html      → Memory Cards
-snake.html       → Snake game
-2048.html        → 2048 game
-reaction.html    → Reaction Time game
-color.html       → Color Matching
-maze.html        → Maze Game
-style.css        → Common CSS for all games
-script.js        → Optional shared JS functions
+body {
+    text-align: center;
+    font-family: Arial;
+    background-color: #111;
+    color: #00ffcc;
+}
+
+h1, h2 {
+    margin: 20px 0;
+}
+
+button, .game-btn {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #00ffcc;
+    border: none;
+    border-radius: 5px;
+    color: black;
+}
+
+button:hover, .game-btn:hover {
+    background: #00ffaa;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.cell, .tile {
+    width: 100px;
+    height: 100px;
+    background: #222;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid #00ffcc;
+}
+
+.cell:hover, .tile:hover {
+    background: #333;
+}
+
+.empty {
+    background: #111;
+    cursor: default;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shivam's Mini Games</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🎮 Shivam's Mini Games Hub</h1>
+<h2>Select a Game to Play</h2>
+
+<div>
+    <button class="game-btn" onclick="location.href='tictactoe.html'">Tic Tac Toe</button>
+    <button class="game-btn" onclick="location.href='puzzle.html'">Number Puzzle</button>
+    <button class="game-btn">Guess the Number (Soon)</button>
+    <button class="game-btn">Rock Paper Scissors (Soon)</button>
+    <button class="game-btn">Memory Game (Soon)</button>
+    <button class="game-btn">Snake Game (Soon)</button>
+    <button class="game-btn">2048 Game (Soon)</button>
+    <button class="game-btn">Reaction Time (Soon)</button>
+    <button class="game-btn">Color Match (Soon)</button>
+    <button class="game-btn">Maze Game (Soon)</button>
+</div>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic Tac Toe vs Robot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🤖 Tic Tac Toe</h1>
+<h2 id="status">Your Turn (X)</h2>
+
+<div class="board">
+  <div class="cell" onclick="playerMove(this,0)"></div>
+  <div class="cell" onclick="playerMove(this,1)"></div>
+  <div class="cell" onclick="playerMove(this,2)"></div>
+  <div class="cell" onclick="playerMove(this,3)"></div>
+  <div class="cell" onclick="playerMove(this,4)"></div>
+  <div class="cell" onclick="playerMove(this,5)"></div>
+  <div class="cell" onclick="playerMove(this,6)"></div>
+  <div class="cell" onclick="playerMove(this,7)"></div>
+  <div class="cell" onclick="playerMove(this,8)"></div>
+</div>
+
+<button onclick="resetGame()">Restart Game</button>
+<button onclick="location.href='index.html'">Back to Hub</button>
+
+<script>
+let board = ["","","","","","","","",""];
+let gameActive = true;
+
+const winPatterns = [
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6]
+];
+
+function playerMove(cell,index){
+  if(board[index] !== "" || !gameActive) return;
+
+  board[index] = "X";
+  cell.innerText = "X";
+
+  if(checkWinner("X")) return;
+
+  document.getElementById("status").innerText = "Robot's Turn...";
+  setTimeout(robotMove, 500);
+}
+
+function robotMove(){
+  let emptyCells = board.map((val,i)=> val==="" ? i : null).filter(v=>v!==null);
+  if(emptyCells.length === 0) return;
+
+  let randomIndex = emptyCells[Math.floor(Math.random()*emptyCells.length)];
+  board[randomIndex] = "O";
+  document.querySelectorAll(".cell")[randomIndex].innerText = "O";
+
+  if(checkWinner("O")) return;
+
+  document.getElementById("status").innerText = "Your Turn (X)";
+}
+
+function checkWinner(player){
+  for(let pattern of winPatterns){
+    let [a,b,c] = pattern;
+    if(board[a]===player && board[b]===player && board[c]===player){
+      document.getElementById("status").innerText =
+        player==="X" ? "You Win! 🎉" : "Robot Wins! 🤖";
+      gameActive = false;
+      return true;
+    }
+  }
+
+  if(!board.includes("")){
+    document.getElementById("status").innerText = "It's a Draw 😎";
+    gameActive = false;
+    return true;
+  }
+
+  return false;
+}
+
+function resetGame(){
+  board = ["","","","","","","","",""];
+  gameActive = true;
+  document.getElementById("status").innerText = "Your Turn (X)";
+  document.querySelectorAll(".cell").forEach(cell=> cell.innerText="");
+}
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Puzzle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🧩 Number Puzzle Game</h1>
+<h2 id="status">Arrange numbers from 1 to 8</h2>
+
+<div class="board" id="board"></div>
+
+<button onclick="shuffle()">Shuffle</button>
+<button onclick="location.href='index.html'">Back to Hub</button>
+
+<script>
+let board = [1,2,3,4,5,6,7,8,""];
+const boardDiv = document.getElementById("board");
+
+function renderBoard(){
+  boardDiv.innerHTML = "";
+  board.forEach((num,index)=>{
+    const tile = document.createElement("div");
+    tile.classList.add("tile");
+    if(num===""){
+      tile.classList.add("empty");
+    } else {
+      tile.innerText = num;
+      tile.onclick = ()=>moveTile(index);
+    }
+    boardDiv.appendChild(tile);
+  });
+}
+
+function moveTile(index){
+  const emptyIndex = board.indexOf("");
+  const validMoves = [emptyIndex-1, emptyIndex+1, emptyIndex-3, emptyIndex+3];
+
+  if(validMoves.includes(index)){
+    [board[index], board[emptyIndex]] = [board[emptyIndex], board[index]];
+    renderBoard();
+    checkWin();
+  }
+}
+
+function shuffle(){
+  board.sort(()=>Math.random()-0.5);
+  renderBoard();
+  document.getElementById("status").innerText = "Arrange numbers from 1 to 8";
+}
+
+function checkWin(){
+  const win = [1,2,3,4,5,6,7,8,""];
+  if(JSON.stringify(board) === JSON.stringify(win)){
+    document.getElementById("status").innerText = "🎉 You Solved It!";
+  }
+}
+
+renderBoard();
+</script>
+
+</body>
+</html>
