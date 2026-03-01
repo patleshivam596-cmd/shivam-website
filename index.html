@@ -1,43 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My AI Girl</title>
+  <title>Tic Tac Toe vs Robot - Shivam</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background-color: #000;
+      color: #00ffcc;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 5px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background: #111;
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid #00ffcc;
+    }
+
+    .cell:hover {
+      background: #222;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #00ffcc;
+      border: none;
+    }
+  </style>
 </head>
 <body>
 
-<img src="girl.jpg" width="300">
+<h1>🤖 Tic Tac Toe vs Robot</h1>
+<h2 id="status">Your Turn (X)</h2>
 
-<button onclick="startListening()">🎤 Speak</button>
+<div class="board">
+  <div class="cell" onclick="playerMove(this,0)"></div>
+  <div class="cell" onclick="playerMove(this,1)"></div>
+  <div class="cell" onclick="playerMove(this,2)"></div>
+  <div class="cell" onclick="playerMove(this,3)"></div>
+  <div class="cell" onclick="playerMove(this,4)"></div>
+  <div class="cell" onclick="playerMove(this,5)"></div>
+  <div class="cell" onclick="playerMove(this,6)"></div>
+  <div class="cell" onclick="playerMove(this,7)"></div>
+  <div class="cell" onclick="playerMove(this,8)"></div>
+</div>
 
-<p id="response"></p>
+<button onclick="resetGame()">Restart Game</button>
 
 <script>
-function startListening() {
-  const recognition = new webkitSpeechRecognition();
-  recognition.lang = "hi-IN";
-  recognition.start();
+let board = ["","","","","","","","",""];
+let gameActive = true;
 
-  recognition.onresult = function(event) {
-    const text = event.results[0][0].transcript;
-    getAIResponse(text);
-  };
+const winPatterns = [
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6]
+];
+
+function playerMove(cell,index){
+  if(board[index] !== "" || !gameActive) return;
+
+  board[index] = "X";
+  cell.innerText = "X";
+
+  if(checkWinner("X")) return;
+
+  document.getElementById("status").innerText = "Robot's Turn...";
+  setTimeout(robotMove, 500);
 }
 
-async function getAIResponse(text) {
-  const response = await fetch("YOUR_API_URL", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ message: text })
-  });
+function robotMove(){
+  let emptyCells = board.map((val,i)=> val==="" ? i : null).filter(v=>v!==null);
+  if(emptyCells.length === 0) return;
 
-  const data = await response.json();
-  document.getElementById("response").innerText = data.reply;
+  let randomIndex = emptyCells[Math.floor(Math.random()*emptyCells.length)];
+  board[randomIndex] = "O";
+  document.querySelectorAll(".cell")[randomIndex].innerText = "O";
 
-  const speech = new SpeechSynthesisUtterance(data.reply);
-  speech.lang = "hi-IN";
-  speechSynthesis.speak(speech);
+  if(checkWinner("O")) return;
+
+  document.getElementById("status").innerText = "Your Turn (X)";
+}
+
+function checkWinner(player){
+  for(let pattern of winPatterns){
+    let [a,b,c] = pattern;
+    if(board[a]===player && board[b]===player && board[c]===player){
+      document.getElementById("status").innerText =
+        player==="X" ? "You Win! 🎉" : "Robot Wins! 🤖";
+      gameActive = false;
+      return true;
+    }
+  }
+
+  if(!board.includes("")){
+    document.getElementById("status").innerText = "It's a Draw 😎";
+    gameActive = false;
+    return true;
+  }
+
+  return false;
+}
+
+function resetGame(){
+  board = ["","","","","","","","",""];
+  gameActive = true;
+  document.getElementById("status").innerText = "Your Turn (X)";
+  document.querySelectorAll(".cell").forEach(cell=> cell.innerText="");
 }
 </script>
 
