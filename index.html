@@ -1,75 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cyber Sad AI</title>
+<title>Cyber Girl AI</title>
 <style>
 body{
-  background:#111;
+  background:black;
   color:white;
-  font-family:sans-serif;
   text-align:center;
+  font-family:sans-serif;
 }
-#chat{
+
+#girl{
+  width:200px;
   margin-top:20px;
+  border-radius:50%;
+  box-shadow:0 0 20px pink;
 }
-input{
-  padding:8px;
-  width:60%;
-}
+
 button{
-  padding:8px;
+  padding:12px 20px;
+  margin-top:20px;
+  background:pink;
+  border:none;
+  cursor:pointer;
 }
-.message{
-  margin:10px;
-}
-.bot{
+
+#status{
+  margin-top:20px;
   color:cyan;
-}
-.user{
-  color:lime;
 }
 </style>
 </head>
 <body>
 
-<h1>Cyber Shivam Sad AI</h1>
+<h1>Cyber Shivam AI Girl</h1>
 
-<div id="chat"></div>
+<img id="girl" src="https://i.imgur.com/8Km9tLL.png">
 
-<input type="text" id="input" placeholder="Type something...">
-<button onclick="send()">Send</button>
+<br>
+<button onclick="startListening()">🎤 Talk</button>
+
+<div id="status">Click Talk and speak...</div>
 
 <script>
 
-function send(){
-  let input = document.getElementById("input").value;
-  let chat = document.getElementById("chat");
+function speak(text){
+  let speech = new SpeechSynthesisUtterance();
+  speech.text = text;
+  speech.lang = "hi-IN";
+  
+  let voices = speechSynthesis.getVoices();
+  speech.voice = voices.find(v => v.name.toLowerCase().includes("female")) || voices[0];
+  
+  speechSynthesis.speak(speech);
+}
 
-  chat.innerHTML += "<div class='message user'>You: "+input+"</div>";
+function startListening(){
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = "hi-IN";
+  recognition.start();
 
-  let lower = input.toLowerCase();
+  document.getElementById("status").innerText = "Listening...";
 
-  let sadWords = ["sad","alone","broken","heart","dukhi","cry","miss"];
+  recognition.onresult = function(event){
+    let userSpeech = event.results[0][0].transcript;
+    document.getElementById("status").innerText = "You said: " + userSpeech;
 
-  let isSad = sadWords.some(word => lower.includes(word));
+    let reply;
 
-  let response;
+    if(userSpeech.toLowerCase().includes("sad") || userSpeech.toLowerCase().includes("dukhi")){
+      reply = "Kabhi kabhi zindagi thoda mushkil hoti hai, par aap strong ho.";
+    }
+    else{
+      reply = "Aapne kaha: " + userSpeech;
+    }
 
-  if(isSad){
-    let shayari = [
-      "Kabhi kabhi khamoshi bhi dard bayan kar deti hai...",
-      "Dil tootne ki awaaz nahi hoti, par dard gehra hota hai.",
-      "Muskurahat ke peeche bhi kahani chhupi hoti hai.",
-      "Har kisi ko samajhna aasan nahi hota."
-    ];
-    response = shayari[Math.floor(Math.random()*shayari.length)];
-  } else {
-    response = "Main Cyber Shivam AI hoon 😎 Tumne kaha: " + input;
+    speak(reply);
   }
 
-  chat.innerHTML += "<div class='message bot'>AI: "+response+"</div>";
-
-  document.getElementById("input").value="";
+  recognition.onerror = function(){
+    document.getElementById("status").innerText = "Mic permission denied!";
+  }
 }
 
 </script>
