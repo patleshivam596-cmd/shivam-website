@@ -1,119 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cyber Shivam</title>
+<title>Cyber Shivam Terminal</title>
 <style>
 body{
-    background:black;
-    color:lime;
-    font-family:monospace;
-    text-align:center;
-}
-
-h1{
-    text-shadow:0 0 10px lime;
-}
-
-.box{
-    margin-top:20px;
-}
-
-input,select,button{
-    padding:8px;
-    margin:5px;
-    background:black;
-    color:lime;
-    border:1px solid lime;
-}
-
-button:hover{
-    background:lime;
-    color:black;
-    cursor:pointer;
-}
-
-#terminal{
-    margin-top:20px;
-    min-height:60px;
-}
-
-.card{
-    border:1px solid lime;
-    padding:15px;
-    margin-top:20px;
-    display:none;
-    box-shadow:0 0 10px lime;
+  background:black;
+  color:lime;
+  font-family:monospace;
+  padding:20px;
 }
 </style>
 </head>
-
 <body>
 
-<h1>CYBER SHIVAM</h1>
-
-<div id="terminal"></div>
-
-<div class="box">
-<input type="text" id="name" placeholder="Enter Player Name">
-
-<select id="weapon">
-<option>Katana</option>
-<option>Sniper</option>
-<option>Bow</option>
-</select>
-
-<select id="power">
-<option>Fire</option>
-<option>Ice</option>
-<option>Shadow</option>
-</select>
-
-<button onclick="generate()">Create Player</button>
-</div>
-
-<div class="card" id="card"></div>
+<h2>CYBER SHIVAM TERMINAL</h2>
+<div id="output"></div>
 
 <script>
-function typeText(text, element, speed){
-    let i=0;
+let text = [
+"Initializing system...",
+"Bypassing security...",
+"Accessing database...",
+"Decrypting files...",
+"Access Granted!"
+];
+
+let i = 0;
+function typeLine(){
+  if(i < text.length){
+    let line = document.createElement("p");
+    document.getElementById("output").appendChild(line);
+    let j = 0;
     function typing(){
-        if(i<text.length){
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing,speed);
-        }
+      if(j < text[i].length){
+        line.innerHTML += text[i].charAt(j);
+        j++;
+        setTimeout(typing,50);
+      }
     }
     typing();
+    i++;
+    setTimeout(typeLine,1000);
+  }
 }
 
-function generate(){
-    let terminal=document.getElementById("terminal");
-    terminal.innerHTML="";
-    typeText("Accessing Server...\n",terminal,30);
-
-    setTimeout(()=>{
-        terminal.innerHTML+="<br>System Breached...";
-    },1000);
-
-    setTimeout(()=>{
-        terminal.innerHTML+="<br>Creating Player...";
-    },2000);
-
-    setTimeout(()=>{
-        let name=document.getElementById("name").value;
-        let weapon=document.getElementById("weapon").value;
-        let power=document.getElementById("power").value;
-
-        let card=document.getElementById("card");
-        card.style.display="block";
-        card.innerHTML="<h2>"+name+"</h2>"
-        +"<p>Weapon: "+weapon+"</p>"
-        +"<p>Power: "+power+"</p>"
-        +"<p>Status: ELITE CYBER WARRIOR</p>";
-
-        terminal.innerHTML+="<br>Player Created Successfully!";
-    },3000);
-}
+typeLine();
 </script>
 
 </body>
