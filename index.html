@@ -1,50 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cyber Shivam Terminal</title>
+<title>Cyber Sad AI</title>
 <style>
 body{
-  background:black;
+  background:#111;
+  color:white;
+  font-family:sans-serif;
+  text-align:center;
+}
+#chat{
+  margin-top:20px;
+}
+input{
+  padding:8px;
+  width:60%;
+}
+button{
+  padding:8px;
+}
+.message{
+  margin:10px;
+}
+.bot{
+  color:cyan;
+}
+.user{
   color:lime;
-  font-family:monospace;
-  padding:20px;
 }
 </style>
 </head>
 <body>
 
-<h2>CYBER SHIVAM TERMINAL</h2>
-<div id="output"></div>
+<h1>Cyber Shivam Sad AI</h1>
+
+<div id="chat"></div>
+
+<input type="text" id="input" placeholder="Type something...">
+<button onclick="send()">Send</button>
 
 <script>
-let text = [
-"Initializing system...",
-"Bypassing security...",
-"Accessing database...",
-"Decrypting files...",
-"Access Granted!"
-];
 
-let i = 0;
-function typeLine(){
-  if(i < text.length){
-    let line = document.createElement("p");
-    document.getElementById("output").appendChild(line);
-    let j = 0;
-    function typing(){
-      if(j < text[i].length){
-        line.innerHTML += text[i].charAt(j);
-        j++;
-        setTimeout(typing,50);
-      }
-    }
-    typing();
-    i++;
-    setTimeout(typeLine,1000);
+function send(){
+  let input = document.getElementById("input").value;
+  let chat = document.getElementById("chat");
+
+  chat.innerHTML += "<div class='message user'>You: "+input+"</div>";
+
+  let lower = input.toLowerCase();
+
+  let sadWords = ["sad","alone","broken","heart","dukhi","cry","miss"];
+
+  let isSad = sadWords.some(word => lower.includes(word));
+
+  let response;
+
+  if(isSad){
+    let shayari = [
+      "Kabhi kabhi khamoshi bhi dard bayan kar deti hai...",
+      "Dil tootne ki awaaz nahi hoti, par dard gehra hota hai.",
+      "Muskurahat ke peeche bhi kahani chhupi hoti hai.",
+      "Har kisi ko samajhna aasan nahi hota."
+    ];
+    response = shayari[Math.floor(Math.random()*shayari.length)];
+  } else {
+    response = "Main Cyber Shivam AI hoon 😎 Tumne kaha: " + input;
   }
+
+  chat.innerHTML += "<div class='message bot'>AI: "+response+"</div>";
+
+  document.getElementById("input").value="";
 }
 
-typeLine();
 </script>
 
 </body>
