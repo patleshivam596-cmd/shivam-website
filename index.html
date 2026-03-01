@@ -1,88 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cyber Girl AI</title>
-<style>
-body{
-  background:black;
-  color:white;
-  text-align:center;
-  font-family:sans-serif;
-}
-
-#girl{
-  width:200px;
-  margin-top:20px;
-  border-radius:50%;
-  box-shadow:0 0 20px pink;
-}
-
-button{
-  padding:12px 20px;
-  margin-top:20px;
-  background:pink;
-  border:none;
-  cursor:pointer;
-}
-
-#status{
-  margin-top:20px;
-  color:cyan;
-}
-</style>
+<title>My AI Girl</title>
 </head>
 <body>
 
-<h1>Cyber Shivam AI Girl</h1>
+<img src="girl.jpg" width="300">
 
-<img id="girl" src="https://i.imgur.com/8Km9tLL.png">
+<button onclick="startListening()">🎤 Speak</button>
 
-<br>
-<button onclick="startListening()">🎤 Talk</button>
-
-<div id="status">Click Talk and speak...</div>
+<p id="response"></p>
 
 <script>
-
-function speak(text){
-  let speech = new SpeechSynthesisUtterance();
-  speech.text = text;
-  speech.lang = "hi-IN";
-  
-  let voices = speechSynthesis.getVoices();
-  speech.voice = voices.find(v => v.name.toLowerCase().includes("female")) || voices[0];
-  
-  speechSynthesis.speak(speech);
-}
-
-function startListening(){
-  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+function startListening() {
+  const recognition = new webkitSpeechRecognition();
   recognition.lang = "hi-IN";
   recognition.start();
 
-  document.getElementById("status").innerText = "Listening...";
-
-  recognition.onresult = function(event){
-    let userSpeech = event.results[0][0].transcript;
-    document.getElementById("status").innerText = "You said: " + userSpeech;
-
-    let reply;
-
-    if(userSpeech.toLowerCase().includes("sad") || userSpeech.toLowerCase().includes("dukhi")){
-      reply = "Kabhi kabhi zindagi thoda mushkil hoti hai, par aap strong ho.";
-    }
-    else{
-      reply = "Aapne kaha: " + userSpeech;
-    }
-
-    speak(reply);
-  }
-
-  recognition.onerror = function(){
-    document.getElementById("status").innerText = "Mic permission denied!";
-  }
+  recognition.onresult = function(event) {
+    const text = event.results[0][0].transcript;
+    getAIResponse(text);
+  };
 }
 
+async function getAIResponse(text) {
+  const response = await fetch("YOUR_API_URL", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message: text })
+  });
+
+  const data = await response.json();
+  document.getElementById("response").innerText = data.reply;
+
+  const speech = new SpeechSynthesisUtterance(data.reply);
+  speech.lang = "hi-IN";
+  speechSynthesis.speak(speech);
+}
 </script>
 
 </body>
