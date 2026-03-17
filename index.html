@@ -1,101 +1,120 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Free Fire IGL Guide - Shivam</title>
+<title>Free Fire IGL Pro Guide</title>
 
 <style>
 body{
 font-family:Arial;
-background:#0b0b0b;
-color:white;
+background:#000;
+color:#00ffcc;
 text-align:center;
 }
 
 h1{
-color:#00ffcc;
+margin-top:20px;
 }
 
 .section{
-background:#1a1a1a;
+background:#111;
 margin:20px;
 padding:15px;
 border-radius:10px;
 }
 
+button{
+padding:10px;
+margin:5px;
+cursor:pointer;
+background:#00ffcc;
+border:none;
+}
+
 img{
 width:90%;
-max-width:400px;
-margin-top:10px;
+max-width:350px;
 border-radius:10px;
+margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🔥 Free Fire IGL Guide 🔥</h1>
+<h1>🔥 IGL PRO GUIDE 🔥</h1>
 
-<!-- Squad Roles -->
+<!-- ROLE SELECT -->
 <div class="section">
-<h2>🎯 Squad Roles</h2>
+<h2>Select Your Role</h2>
 
-<p><b>🔫 Assaulter:</b><br>
-Front line player, fights first.<br>
-Good aim + aggressive gameplay.</p>
+<button onclick="showRole('assaulter')">Assaulter</button>
+<button onclick="showRole('rusher')">Rusher</button>
+<button onclick="showRole('sniper')">Sniper</button>
 
-<p><b>⚡ Primary Rusher:</b><br>
-Push enemy squad fast.<br>
-Use SMG + shotgun.</p>
-
-<p><b>🔥 Secondary Rusher:</b><br>
-Backup rusher.<br>
-Support and revive teammates.</p>
-
-<p><b>🎯 Sniper:</b><br>
-Long range fights.<br>
-Give cover and knock enemies.</p>
+<p id="roleInfo">Click role to see details</p>
 </div>
 
-<!-- Character Skills -->
+<!-- MAP SELECT -->
 <div class="section">
-<h2>🧬 Best Character Skills</h2>
+<h2>Select Map</h2>
 
-<p><b>Assaulter:</b> Alok, Chrono</p>
-<p><b>Rusher:</b> Jota, Kelly</p>
-<p><b>Sniper:</b> Laura, Rafael</p>
+<button onclick="showMap('bermuda')">Bermuda</button>
+<button onclick="showMap('purgatory')">Purgatory</button>
+<button onclick="showMap('kalahari')">Kalahari</button>
 
-<p>Use combination of speed + healing + accuracy.</p>
+<p id="mapInfo"></p>
+<img id="mapImg" src="">
 </div>
 
-<!-- Positioning -->
-<div class="section">
-<h2>📍 Positioning Guide</h2>
+<script>
 
-<p><b>IGL:</b> Always center position</p>
-<p><b>Rusher:</b> Front push</p>
-<p><b>Sniper:</b> High ground / back</p>
-<p><b>Support:</b> Middle cover</p>
+// ROLE INFO
+function showRole(role){
 
-<p>Always stay in formation and don't rush solo ❌</p>
-</div>
+let text="";
 
-<!-- Maps -->
-<div class="section">
-<h2>🗺️ Maps & Drop Locations</h2>
+if(role==="assaulter"){
+text="🔫 Assaulter: Front line player. Skills: Alok, Chrono. Position: Push first.";
+}
 
-<h3>Bermuda</h3>
-<p>Best Drops: Clock Tower, Peak, Factory</p>
-<img src="https://i.imgur.com/8Qf6R9p.jpg">
+else if(role==="rusher"){
+text="⚡ Rusher: Fast attack. Skills: Jota, Kelly. Position: Entry + backup.";
+}
 
-<h3>Purgatory</h3>
-<p>Best Drops: Brasilia, Ski Lodge</p>
-<img src="https://i.imgur.com/3KXnQyL.jpg">
+else if(role==="sniper"){
+text="🎯 Sniper: Long range. Skills: Laura, Rafael. Position: High ground.";
+}
 
-<h3>Kalahari</h3>
-<p>Best Drops: Refinery, Command Post</p>
-<img src="https://i.imgur.com/eJrX2rC.jpg">
+document.getElementById("roleInfo").innerText=text;
+}
 
-</div>
+// MAP INFO
+function showMap(map){
+
+let text="";
+let img="";
+
+if(map==="bermuda"){
+text="Bermuda: Clock Tower, Peak, Factory best drop.";
+img="https://i.imgur.com/8Qf6R9p.jpg";
+}
+
+else if(map==="purgatory"){
+text="Purgatory: Brasilia, Ski Lodge best drop.";
+img="https://i.imgur.com/3KXnQyL.jpg";
+}
+
+else if(map==="kalahari"){
+text="Kalahari: Refinery, Command Post best drop.";
+img="https://i.imgur.com/eJrX2rC.jpg";
+}
+
+document.getElementById("mapInfo").innerText=text;
+document.getElementById("mapImg").src=img;
+
+}
+
+</script>
 
 </body>
 </html>
