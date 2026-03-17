@@ -1,238 +1,101 @@
-body {
-    text-align: center;
-    font-family: Arial;
-    background-color: #111;
-    color: #00ffcc;
-}
-
-h1, h2 {
-    margin: 20px 0;
-}
-
-button, .game-btn {
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    background: #00ffcc;
-    border: none;
-    border-radius: 5px;
-    color: black;
-}
-
-button:hover, .game-btn:hover {
-    background: #00ffaa;
-}
-
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-gap: 5px;
-    justify-content: center;
-    margin: 20px auto;
-}
-
-.cell, .tile {
-    width: 100px;
-    height: 100px;
-    background: #222;
-    font-size: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: 2px solid #00ffcc;
-}
-
-.cell:hover, .tile:hover {
-    background: #333;
-}
-
-.empty {
-    background: #111;
-    cursor: default;
-}
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Shivam's Mini Games</title>
-    <link rel="stylesheet" href="style.css">
+<title>Free Fire IGL Guide - Shivam</title>
+
+<style>
+body{
+font-family:Arial;
+background:#0b0b0b;
+color:white;
+text-align:center;
+}
+
+h1{
+color:#00ffcc;
+}
+
+.section{
+background:#1a1a1a;
+margin:20px;
+padding:15px;
+border-radius:10px;
+}
+
+img{
+width:90%;
+max-width:400px;
+margin-top:10px;
+border-radius:10px;
+}
+</style>
 </head>
+
 <body>
 
-<h1>🎮 Shivam's Mini Games Hub</h1>
-<h2>Select a Game to Play</h2>
+<h1>🔥 Free Fire IGL Guide 🔥</h1>
 
-<div>
-    <button class="game-btn" onclick="location.href='tictactoe.html'">Tic Tac Toe</button>
-    <button class="game-btn" onclick="location.href='puzzle.html'">Number Puzzle</button>
-    <button class="game-btn">Guess the Number (Soon)</button>
-    <button class="game-btn">Rock Paper Scissors (Soon)</button>
-    <button class="game-btn">Memory Game (Soon)</button>
-    <button class="game-btn">Snake Game (Soon)</button>
-    <button class="game-btn">2048 Game (Soon)</button>
-    <button class="game-btn">Reaction Time (Soon)</button>
-    <button class="game-btn">Color Match (Soon)</button>
-    <button class="game-btn">Maze Game (Soon)</button>
+<!-- Squad Roles -->
+<div class="section">
+<h2>🎯 Squad Roles</h2>
+
+<p><b>🔫 Assaulter:</b><br>
+Front line player, fights first.<br>
+Good aim + aggressive gameplay.</p>
+
+<p><b>⚡ Primary Rusher:</b><br>
+Push enemy squad fast.<br>
+Use SMG + shotgun.</p>
+
+<p><b>🔥 Secondary Rusher:</b><br>
+Backup rusher.<br>
+Support and revive teammates.</p>
+
+<p><b>🎯 Sniper:</b><br>
+Long range fights.<br>
+Give cover and knock enemies.</p>
 </div>
 
-</body>
-</html>
+<!-- Character Skills -->
+<div class="section">
+<h2>🧬 Best Character Skills</h2>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Tic Tac Toe vs Robot</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<p><b>Assaulter:</b> Alok, Chrono</p>
+<p><b>Rusher:</b> Jota, Kelly</p>
+<p><b>Sniper:</b> Laura, Rafael</p>
 
-<h1>🤖 Tic Tac Toe</h1>
-<h2 id="status">Your Turn (X)</h2>
-
-<div class="board">
-  <div class="cell" onclick="playerMove(this,0)"></div>
-  <div class="cell" onclick="playerMove(this,1)"></div>
-  <div class="cell" onclick="playerMove(this,2)"></div>
-  <div class="cell" onclick="playerMove(this,3)"></div>
-  <div class="cell" onclick="playerMove(this,4)"></div>
-  <div class="cell" onclick="playerMove(this,5)"></div>
-  <div class="cell" onclick="playerMove(this,6)"></div>
-  <div class="cell" onclick="playerMove(this,7)"></div>
-  <div class="cell" onclick="playerMove(this,8)"></div>
+<p>Use combination of speed + healing + accuracy.</p>
 </div>
 
-<button onclick="resetGame()">Restart Game</button>
-<button onclick="location.href='index.html'">Back to Hub</button>
+<!-- Positioning -->
+<div class="section">
+<h2>📍 Positioning Guide</h2>
 
-<script>
-let board = ["","","","","","","","",""];
-let gameActive = true;
+<p><b>IGL:</b> Always center position</p>
+<p><b>Rusher:</b> Front push</p>
+<p><b>Sniper:</b> High ground / back</p>
+<p><b>Support:</b> Middle cover</p>
 
-const winPatterns = [
-  [0,1,2],[3,4,5],[6,7,8],
-  [0,3,6],[1,4,7],[2,5,8],
-  [0,4,8],[2,4,6]
-];
+<p>Always stay in formation and don't rush solo ❌</p>
+</div>
 
-function playerMove(cell,index){
-  if(board[index] !== "" || !gameActive) return;
+<!-- Maps -->
+<div class="section">
+<h2>🗺️ Maps & Drop Locations</h2>
 
-  board[index] = "X";
-  cell.innerText = "X";
+<h3>Bermuda</h3>
+<p>Best Drops: Clock Tower, Peak, Factory</p>
+<img src="https://i.imgur.com/8Qf6R9p.jpg">
 
-  if(checkWinner("X")) return;
+<h3>Purgatory</h3>
+<p>Best Drops: Brasilia, Ski Lodge</p>
+<img src="https://i.imgur.com/3KXnQyL.jpg">
 
-  document.getElementById("status").innerText = "Robot's Turn...";
-  setTimeout(robotMove, 500);
-}
+<h3>Kalahari</h3>
+<p>Best Drops: Refinery, Command Post</p>
+<img src="https://i.imgur.com/eJrX2rC.jpg">
 
-function robotMove(){
-  let emptyCells = board.map((val,i)=> val==="" ? i : null).filter(v=>v!==null);
-  if(emptyCells.length === 0) return;
-
-  let randomIndex = emptyCells[Math.floor(Math.random()*emptyCells.length)];
-  board[randomIndex] = "O";
-  document.querySelectorAll(".cell")[randomIndex].innerText = "O";
-
-  if(checkWinner("O")) return;
-
-  document.getElementById("status").innerText = "Your Turn (X)";
-}
-
-function checkWinner(player){
-  for(let pattern of winPatterns){
-    let [a,b,c] = pattern;
-    if(board[a]===player && board[b]===player && board[c]===player){
-      document.getElementById("status").innerText =
-        player==="X" ? "You Win! 🎉" : "Robot Wins! 🤖";
-      gameActive = false;
-      return true;
-    }
-  }
-
-  if(!board.includes("")){
-    document.getElementById("status").innerText = "It's a Draw 😎";
-    gameActive = false;
-    return true;
-  }
-
-  return false;
-}
-
-function resetGame(){
-  board = ["","","","","","","","",""];
-  gameActive = true;
-  document.getElementById("status").innerText = "Your Turn (X)";
-  document.querySelectorAll(".cell").forEach(cell=> cell.innerText="");
-}
-</script>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Number Puzzle</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<h1>🧩 Number Puzzle Game</h1>
-<h2 id="status">Arrange numbers from 1 to 8</h2>
-
-<div class="board" id="board"></div>
-
-<button onclick="shuffle()">Shuffle</button>
-<button onclick="location.href='index.html'">Back to Hub</button>
-
-<script>
-let board = [1,2,3,4,5,6,7,8,""];
-const boardDiv = document.getElementById("board");
-
-function renderBoard(){
-  boardDiv.innerHTML = "";
-  board.forEach((num,index)=>{
-    const tile = document.createElement("div");
-    tile.classList.add("tile");
-    if(num===""){
-      tile.classList.add("empty");
-    } else {
-      tile.innerText = num;
-      tile.onclick = ()=>moveTile(index);
-    }
-    boardDiv.appendChild(tile);
-  });
-}
-
-function moveTile(index){
-  const emptyIndex = board.indexOf("");
-  const validMoves = [emptyIndex-1, emptyIndex+1, emptyIndex-3, emptyIndex+3];
-
-  if(validMoves.includes(index)){
-    [board[index], board[emptyIndex]] = [board[emptyIndex], board[index]];
-    renderBoard();
-    checkWin();
-  }
-}
-
-function shuffle(){
-  board.sort(()=>Math.random()-0.5);
-  renderBoard();
-  document.getElementById("status").innerText = "Arrange numbers from 1 to 8";
-}
-
-function checkWin(){
-  const win = [1,2,3,4,5,6,7,8,""];
-  if(JSON.stringify(board) === JSON.stringify(win)){
-    document.getElementById("status").innerText = "🎉 You Solved It!";
-  }
-}
-
-renderBoard();
-</script>
+</div>
 
 </body>
 </html>
