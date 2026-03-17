@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Free Fire IGL Pro Guide</title>
+<title>IGL eSports Pro Guide</title>
 
 <style>
 body{
@@ -17,7 +17,7 @@ margin-top:20px;
 
 .section{
 background:#111;
-margin:20px;
+margin:15px;
 padding:15px;
 border-radius:10px;
 }
@@ -28,6 +28,7 @@ margin:5px;
 cursor:pointer;
 background:#00ffcc;
 border:none;
+border-radius:5px;
 }
 
 img{
@@ -36,82 +37,119 @@ max-width:350px;
 border-radius:10px;
 margin-top:10px;
 }
+
 </style>
 </head>
 
 <body>
 
-<h1>🔥 IGL PRO GUIDE 🔥</h1>
+<h1>🔥 IGL PRO eSports Guide 🔥</h1>
 
-<!-- ROLE SELECT -->
+<!-- ROLE -->
 <div class="section">
-<h2>Select Your Role</h2>
+<h2>🎯 Select Role</h2>
 
-<button onclick="showRole('assaulter')">Assaulter</button>
-<button onclick="showRole('rusher')">Rusher</button>
-<button onclick="showRole('sniper')">Sniper</button>
+<button onclick="role('assault')">Assaulter</button>
+<button onclick="role('rusher')">Rusher</button>
+<button onclick="role('sniper')">Sniper</button>
 
-<p id="roleInfo">Click role to see details</p>
+<p id="roleText">Click role to see strategy</p>
 </div>
 
-<!-- MAP SELECT -->
+<!-- MAP -->
 <div class="section">
-<h2>Select Map</h2>
+<h2>🗺️ Select Map</h2>
 
-<button onclick="showMap('bermuda')">Bermuda</button>
-<button onclick="showMap('purgatory')">Purgatory</button>
-<button onclick="showMap('kalahari')">Kalahari</button>
+<button onclick="map('bermuda')">Bermuda</button>
+<button onclick="map('purgatory')">Purgatory</button>
+<button onclick="map('kalahari')">Kalahari</button>
 
-<p id="mapInfo"></p>
-<img id="mapImg" src="">
+<p id="mapText"></p>
+<img id="mapImg">
+</div>
+
+<!-- WEAPON -->
+<div class="section">
+<h2>🔫 Weapon Guide</h2>
+
+<button onclick="weapon('close')">Close Range</button>
+<button onclick="weapon('mid')">Mid Range</button>
+<button onclick="weapon('long')">Long Range</button>
+
+<p id="weaponText"></p>
+</div>
+
+<!-- IGL COMMAND -->
+<div class="section">
+<h2>🎙️ IGL Commands</h2>
+
+<button onclick="command()">Give Command</button>
+
+<p id="commandText"></p>
 </div>
 
 <script>
 
-// ROLE INFO
-function showRole(role){
-
-let text="";
-
-if(role==="assaulter"){
-text="🔫 Assaulter: Front line player. Skills: Alok, Chrono. Position: Push first.";
+// ROLE
+function role(r){
+let t="";
+if(r=="assault"){
+t="Assaulter: Front push. Skills: Alok, Chrono. Position: First fight.";
+}
+else if(r=="rusher"){
+t="Rusher: Fast entry. Skills: Jota, Kelly. Position: Rush + support.";
+}
+else{
+t="Sniper: Long range. Skills: Laura, Rafael. Position: High ground.";
+}
+document.getElementById("roleText").innerText=t;
 }
 
-else if(role==="rusher"){
-text="⚡ Rusher: Fast attack. Skills: Jota, Kelly. Position: Entry + backup.";
-}
-
-else if(role==="sniper"){
-text="🎯 Sniper: Long range. Skills: Laura, Rafael. Position: High ground.";
-}
-
-document.getElementById("roleInfo").innerText=text;
-}
-
-// MAP INFO
-function showMap(map){
-
-let text="";
-let img="";
-
-if(map==="bermuda"){
-text="Bermuda: Clock Tower, Peak, Factory best drop.";
+// MAP
+function map(m){
+let t="",img="";
+if(m=="bermuda"){
+t="Clock Tower, Peak best drop.";
 img="https://i.imgur.com/8Qf6R9p.jpg";
 }
-
-else if(map==="purgatory"){
-text="Purgatory: Brasilia, Ski Lodge best drop.";
+else if(m=="purgatory"){
+t="Brasilia, Ski Lodge best drop.";
 img="https://i.imgur.com/3KXnQyL.jpg";
 }
-
-else if(map==="kalahari"){
-text="Kalahari: Refinery, Command Post best drop.";
+else{
+t="Refinery best drop.";
 img="https://i.imgur.com/eJrX2rC.jpg";
 }
-
-document.getElementById("mapInfo").innerText=text;
+document.getElementById("mapText").innerText=t;
 document.getElementById("mapImg").src=img;
+}
 
+// WEAPON
+function weapon(w){
+let t="";
+if(w=="close"){
+t="MP40, M1014 best for rush.";
+}
+else if(w=="mid"){
+t="AK, Scar best balanced.";
+}
+else{
+t="AWM, Kar98 best sniper.";
+}
+document.getElementById("weaponText").innerText=t;
+}
+
+// COMMAND
+function command(){
+let cmds=[
+"Rush left side!",
+"Take high ground!",
+"Cover me!",
+"Fall back!",
+"Push now!"
+];
+let random=cmds[Math.floor(Math.random()*cmds.length)];
+document.getElementById("commandText").innerText=random;
 }
 
 </script>
