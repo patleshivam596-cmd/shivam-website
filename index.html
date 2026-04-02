@@ -1,75 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My Harmonium</title>
+<title>Web Harmonium</title>
 
 <style>
 
-body {
-    margin:0;
-    background:#111;
-    text-align:center;
-    font-family:Arial;
-    color:white;
+body{
+margin:0;
+font-family:Arial;
+background:#f2f2f2;
+text-align:center;
 }
 
-h1 {
-    padding:10px;
-}
-
-/* Volume Slider */
-
-.controls {
-    margin:10px;
+.header{
+background:#0b8a80;
+color:white;
+padding:18px;
+font-size:26px;
 }
 
 /* Keyboard */
 
-.keyboard {
-    position:relative;
-    width:560px;
-    margin:auto;
+.keyboard{
+position:relative;
+width:560px;
+margin:20px auto;
 }
 
-/* White Keys */
-
-.white {
-    width:80px;
-    height:260px;
-    background:white;
-    border:1px solid black;
-    display:inline-block;
-    color:black;
-    line-height:240px;
-    font-weight:bold;
+.white{
+width:80px;
+height:220px;
+background:white;
+border:1px solid black;
+display:inline-block;
+line-height:200px;
+font-weight:bold;
 }
 
-/* Black Keys */
-
-.black {
-    width:50px;
-    height:150px;
-    background:black;
-    position:absolute;
-    top:0;
-    color:white;
-    line-height:130px;
+.black{
+width:50px;
+height:130px;
+background:black;
+position:absolute;
+top:0;
 }
 
-/* Black Key Positions */
+/* Black key positions */
 
-#k1 { left:60px; }
-#k2 { left:140px; }
-#k3 { left:300px; }
-#k4 { left:380px; }
-#k5 { left:460px; }
+#k1{left:60px;}
+#k2{left:140px;}
+#k3{left:300px;}
+#k4{left:380px;}
+#k5{left:460px;}
 
-.white:active {
-    background:yellow;
+/* Control Boxes */
+
+.box{
+background:#6f8f9c;
+color:white;
+padding:15px;
+margin:20px;
+border-radius:5px;
 }
 
-.black:active {
-    background:red;
+.slider{
+width:80%;
+}
+
+.button{
+padding:10px 20px;
+font-size:20px;
+margin:10px;
 }
 
 </style>
@@ -78,36 +79,112 @@ h1 {
 
 <body>
 
-<h1>🎹 My 1-Octave Harmonium</h1>
+<div class="header">
+Web Harmonium
+</div>
 
-<div class="controls">
+<!-- Keyboard -->
+
+<div class="keyboard">
+
+<div class="white"
+onclick="play('C')">C</div>
+
+<div class="white"
+onclick="play('D')">D</div>
+
+<div class="white"
+onclick="play('E')">E</div>
+
+<div class="white"
+onclick="play('F')">F</div>
+
+<div class="white"
+onclick="play('G')">G</div>
+
+<div class="white"
+onclick="play('A')">A</div>
+
+<div class="white"
+onclick="play('B')">B</div>
+
+<div class="black"
+id="k1"
+onclick="play('Cs')"></div>
+
+<div class="black"
+id="k2"
+onclick="play('Ds')"></div>
+
+<div class="black"
+id="k3"
+onclick="play('Fs')"></div>
+
+<div class="black"
+id="k4"
+onclick="play('Gs')"></div>
+
+<div class="black"
+id="k5"
+onclick="play('As')"></div>
+
+</div>
+
+<!-- Volume -->
+
+<div class="box">
 
 Volume:
-<input type="range" min="0" max="1"
-step="0.1" value="1"
+<br><br>
+
+<input type="range"
+min="0"
+max="1"
+step="0.1"
+value="1"
+class="slider"
 oninput="setVolume(this.value)">
 
 </div>
 
-<div class="keyboard">
+<!-- Reverb -->
 
-<div class="white" onclick="play('C')">Sa</div>
-<div class="white" onclick="play('D')">Re</div>
-<div class="white" onclick="play('E')">Ga</div>
-<div class="white" onclick="play('F')">Ma</div>
-<div class="white" onclick="play('G')">Pa</div>
-<div class="white" onclick="play('A')">Dha</div>
-<div class="white" onclick="play('B')">Ni</div>
+<div class="box">
 
-<div class="black" id="k1" onclick="play('Cs')"></div>
-<div class="black" id="k2" onclick="play('Ds')"></div>
-<div class="black" id="k3" onclick="play('Fs')"></div>
-<div class="black" id="k4" onclick="play('Gs')"></div>
-<div class="black" id="k5" onclick="play('As')"></div>
+Reverb
+
+<br><br>
+
+<input type="checkbox"
+onclick="toggleReverb()">
 
 </div>
 
-<!-- Audio Files -->
+<!-- Transpose -->
+
+<div class="box">
+
+Transpose
+
+<br><br>
+
+<button class="button"
+onclick="transpose(-1)">
+-
+</button>
+
+<span id="transposeValue">
+0
+</span>
+
+<button class="button"
+onclick="transpose(1)">
++
+</button>
+
+</div>
+
+<!-- Audio -->
 
 <audio id="C" src="C.mp3"></audio>
 <audio id="D" src="D.mp3"></audio>
@@ -125,40 +202,34 @@ oninput="setVolume(this.value)">
 
 <script>
 
-let volume = 1;
+let volume=1;
+let transposeValue=0;
 
 function setVolume(v){
-volume = v;
+volume=v;
 }
 
 function play(note){
 
-let sound =
+let sound=
 document.getElementById(note);
 
-sound.volume = volume;
-sound.currentTime = 0;
-
+sound.volume=volume;
+sound.currentTime=0;
 sound.play();
 
 }
 
-/* Keyboard Controls */
+function toggleReverb(){
 
-document.addEventListener("keydown",
-function(e){
+alert("Reverb ON/OFF");
 
-if(e.key=="a") play("C");
-if(e.key=="s") play("D");
-if(e.key=="d") play("E");
-if(e.key=="f") play("F");
-if(e.key=="g") play("G");
-if(e.key=="h") play("A");
-if(e.key=="j") play("B");
+}
 
-});
+function transpose(n){
 
-</script>
+transposeValue+=n;
 
-</body>
-</html>
+document.getElementById(
+"transposeValue"
+).innerText
