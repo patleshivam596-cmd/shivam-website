@@ -1,155 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>IGL eSports Pro Guide</title>
+<meta charset="UTF-8">
+<title>My Web Harmonium</title>
 
 <style>
-body{
-font-family:Arial;
-background:#000;
-color:#00ffcc;
-text-align:center;
+body {
+    text-align: center;
+    font-family: Arial;
+    background: #222;
+    color: white;
 }
 
-h1{
-margin-top:20px;
+h1 {
+    margin-top: 20px;
 }
 
-.section{
-background:#111;
-margin:15px;
-padding:15px;
-border-radius:10px;
+.keyboard {
+    margin-top: 40px;
 }
 
-button{
-padding:10px;
-margin:5px;
-cursor:pointer;
-background:#00ffcc;
-border:none;
-border-radius:5px;
+.key {
+    display: inline-block;
+    width: 70px;
+    height: 200px;
+    margin: 2px;
+    background: white;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    line-height: 180px;
+    cursor: pointer;
 }
 
-img{
-width:90%;
-max-width:350px;
-border-radius:10px;
-margin-top:10px;
+.key:active {
+    background: yellow;
 }
-
 </style>
 </head>
 
 <body>
 
-<h1>🔥 IGL PRO eSports Guide 🔥</h1>
+<h1>🎹 My Web Harmonium</h1>
 
-<!-- ROLE -->
-<div class="section">
-<h2>🎯 Select Role</h2>
+<div class="keyboard">
 
-<button onclick="role('assault')">Assaulter</button>
-<button onclick="role('rusher')">Rusher</button>
-<button onclick="role('sniper')">Sniper</button>
+<div class="key" onclick="playSound('sa')">Sa</div>
+<div class="key" onclick="playSound('re')">Re</div>
+<div class="key" onclick="playSound('ga')">Ga</div>
+<div class="key" onclick="playSound('ma')">Ma</div>
+<div class="key" onclick="playSound('pa')">Pa</div>
+<div class="key" onclick="playSound('dha')">Dha</div>
+<div class="key" onclick="playSound('ni')">Ni</div>
 
-<p id="roleText">Click role to see strategy</p>
-</div>
-
-<!-- MAP -->
-<div class="section">
-<h2>🗺️ Select Map</h2>
-
-<button onclick="map('bermuda')">Bermuda</button>
-<button onclick="map('purgatory')">Purgatory</button>
-<button onclick="map('kalahari')">Kalahari</button>
-
-<p id="mapText"></p>
-<img id="mapImg">
-</div>
-
-<!-- WEAPON -->
-<div class="section">
-<h2>🔫 Weapon Guide</h2>
-
-<button onclick="weapon('close')">Close Range</button>
-<button onclick="weapon('mid')">Mid Range</button>
-<button onclick="weapon('long')">Long Range</button>
-
-<p id="weaponText"></p>
-</div>
-
-<!-- IGL COMMAND -->
-<div class="section">
-<h2>🎙️ IGL Commands</h2>
-
-<button onclick="command()">Give Command</button>
-
-<p id="commandText"></p>
 </div>
 
 <script>
 
-// ROLE
-function role(r){
-let t="";
-if(r=="assault"){
-t="Assaulter: Front push. Skills: Alok, Chrono. Position: First fight.";
-}
-else if(r=="rusher"){
-t="Rusher: Fast entry. Skills: Jota, Kelly. Position: Rush + support.";
-}
-else{
-t="Sniper: Long range. Skills: Laura, Rafael. Position: High ground.";
-}
-document.getElementById("roleText").innerText=t;
-}
+function playSound(note) {
 
-// MAP
-function map(m){
-let t="",img="";
-if(m=="bermuda"){
-t="Clock Tower, Peak best drop.";
-img="https://i.imgur.com/8Qf6R9p.jpg";
-}
-else if(m=="purgatory"){
-t="Brasilia, Ski Lodge best drop.";
-img="https://i.imgur.com/3KXnQyL.jpg";
-}
-else{
-t="Refinery best drop.";
-img="https://i.imgur.com/eJrX2rC.jpg";
-}
-document.getElementById("mapText").innerText=t;
-document.getElementById("mapImg").src=img;
-}
+    let audio = new Audio(note + ".mp3");
+    audio.play();
 
-// WEAPON
-function weapon(w){
-let t="";
-if(w=="close"){
-t="MP40, M1014 best for rush.";
-}
-else if(w=="mid"){
-t="AK, Scar best balanced.";
-}
-else{
-t="AWM, Kar98 best sniper.";
-}
-document.getElementById("weaponText").innerText=t;
-}
-
-// COMMAND
-function command(){
-let cmds=[
-"Rush left side!",
-"Take high ground!",
-"Cover me!",
-"Fall back!",
-"Push now!"
-];
-let random=cmds[Math.floor(Math.random()*cmds.length)];
-document.getElementById("commandText").innerText=random;
 }
 
 </script>
