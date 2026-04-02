@@ -1,42 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>My Web Harmonium</title>
+<title>My Advanced Harmonium</title>
 
 <style>
+
 body {
-    text-align: center;
-    font-family: Arial;
-    background: #222;
-    color: white;
+    margin:0;
+    text-align:center;
+    background:#111;
+    font-family:Arial;
+    color:white;
 }
 
 h1 {
-    margin-top: 20px;
+    padding:15px;
 }
 
 .keyboard {
-    margin-top: 40px;
+    position:relative;
+    width:720px;
+    margin:auto;
 }
 
-.key {
-    display: inline-block;
-    width: 70px;
-    height: 200px;
-    margin: 2px;
-    background: white;
-    border: 1px solid black;
-    color: black;
-    font-weight: bold;
-    line-height: 180px;
-    cursor: pointer;
+/* White Keys */
+
+.white {
+    width:80px;
+    height:300px;
+    background:white;
+    border:1px solid black;
+    display:inline-block;
+    position:relative;
+    color:black;
+    font-weight:bold;
+    line-height:280px;
 }
 
-.key:active {
-    background: yellow;
+/* Black Keys */
+
+.black {
+    width:50px;
+    height:180px;
+    background:black;
+    position:absolute;
+    top:0;
+    color:white;
+    line-height:160px;
 }
+
+/* Black Key Positions */
+
+#k1 { left:60px; }
+#k2 { left:140px; }
+#k3 { left:300px; }
+#k4 { left:380px; }
+#k5 { left:460px; }
+
+.white:active {
+    background:yellow;
+}
+
+.black:active {
+    background:red;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -45,24 +75,62 @@ h1 {
 
 <div class="keyboard">
 
-<div class="key" onclick="playSound('sa')">Sa</div>
-<div class="key" onclick="playSound('re')">Re</div>
-<div class="key" onclick="playSound('ga')">Ga</div>
-<div class="key" onclick="playSound('ma')">Ma</div>
-<div class="key" onclick="playSound('pa')">Pa</div>
-<div class="key" onclick="playSound('dha')">Dha</div>
-<div class="key" onclick="playSound('ni')">Ni</div>
+<div class="white" onclick="play('C')">Sa</div>
+<div class="white" onclick="play('D')">Re</div>
+<div class="white" onclick="play('E')">Ga</div>
+<div class="white" onclick="play('F')">Ma</div>
+<div class="white" onclick="play('G')">Pa</div>
+<div class="white" onclick="play('A')">Dha</div>
+<div class="white" onclick="play('B')">Ni</div>
+
+<div class="black" id="k1" onclick="play('Cs')">#</div>
+<div class="black" id="k2" onclick="play('Ds')">#</div>
+<div class="black" id="k3" onclick="play('Fs')">#</div>
+<div class="black" id="k4" onclick="play('Gs')">#</div>
+<div class="black" id="k5" onclick="play('As')">#</div>
 
 </div>
 
+<!-- Sounds -->
+
+<audio id="C" src="C.mp3"></audio>
+<audio id="D" src="D.mp3"></audio>
+<audio id="E" src="E.mp3"></audio>
+<audio id="F" src="F.mp3"></audio>
+<audio id="G" src="G.mp3"></audio>
+<audio id="A" src="A.mp3"></audio>
+<audio id="B" src="B.mp3"></audio>
+
+<audio id="Cs" src="Cs.mp3"></audio>
+<audio id="Ds" src="Ds.mp3"></audio>
+<audio id="Fs" src="Fs.mp3"></audio>
+<audio id="Gs" src="Gs.mp3"></audio>
+<audio id="As" src="As.mp3"></audio>
+
 <script>
 
-function playSound(note) {
+function play(note) {
 
-    let audio = new Audio(note + ".mp3");
-    audio.play();
+let sound = document.getElementById(note);
+
+sound.currentTime = 0;
+sound.play();
 
 }
+
+/* Keyboard Controls */
+
+document.addEventListener("keydown", function(e){
+
+if(e.key=="a") play("C");
+if(e.key=="s") play("D");
+if(e.key=="d") play("E");
+if(e.key=="f") play("F");
+if(e.key=="g") play("G");
+if(e.key=="h") play("A");
+if(e.key=="j") play("B");
+
+});
 
 </script>
 
