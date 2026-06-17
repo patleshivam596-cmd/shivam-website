@@ -1,151 +1,173 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Web Harmonium</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Face Slice Game</title>
 
 <style>
-
-body {
-  background:#111;
-  color:white;
-  text-align:center;
-  font-family:Arial;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-h1 {
-  margin-top:20px;
+body{
+background:#111;
+font-family:Arial,sans-serif;
+color:white;
+text-align:center;
+overflow:hidden;
 }
 
-.keyboard {
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:30px;
+h1{
+padding:10px;
 }
 
-.key {
-  width:60px;
-  height:200px;
-  background:white;
-  border:1px solid black;
-  margin:2px;
-  cursor:pointer;
+#topbar{
+display:flex;
+justify-content:space-around;
+font-size:22px;
+font-weight:bold;
+padding:10px;
 }
 
-.key.black {
-  background:black;
-  width:40px;
-  height:120px;
+#game{
+width:100vw;
+height:85vh;
+background:#222;
+position:relative;
+overflow:hidden;
 }
 
-.key:active {
-  background:yellow;
+.face{
+position:absolute;
+width:90px;
+height:90px;
+border-radius:50%;
+background-image:url('dead-ACPPradyuman-smiling.jpg');
+background-size:cover;
+background-position:center;
+cursor:pointer;
+box-shadow:0 0 12px rgba(255,255,255,.5);
+transition:.15s;
 }
 
-.controls {
-  margin-top:20px;
+#gameover{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:black;
+padding:20px;
+border-radius:10px;
+font-size:28px;
+z-index:999;
 }
-
 </style>
-
 </head>
-
 <body>
 
-<h1>My Web Harmonium 🎹</h1>
+<h1>FACE SLICE GAME</h1>
 
-<div class="controls">
-
-<label>Volume 🔊</label>
-
-<input
-type="range"
-min="0"
-max="1"
-step="0.1"
-value="0.5"
-id="volume">
-
+<div id="topbar">
+<div>Score: <span id="score">0</span></div>
+<div>Time: <span id="time">30</span></div>
 </div>
 
-<div class="keyboard" id="keyboard"></div>
+<div id="game">
+<div id="gameover"></div>
+</div>
+
+<audio id="cutSound" src="Kyu_re_madarchod___CID_Acp_Gaali_Meme__(128k).m4a"></audio>
 
 <script>
 
-// NOTES LIST (3 OCTAVE)
+let score = 0;
+let timeLeft = 30;
+let running = true;
 
-let notes = [
+const game = document.getElementById("game");
+const scoreText = document.getElementById("score");
+const timeText = document.getElementById("time");
+const gameover = document.getElementById("gameover");
+const sound = document.getElementById("cutSound");
 
-"C3","D3","E3","F3","G3","A3","B3",
+function cutFace(face){
 
-"C4","D4","E4","F4","G4","A4","B4",
+if(!face.parentNode) return;
 
-"C5","D5","E5","F5","G5","A5","B5"
+sound.currentTime = 0;
+sound.play();
 
-];
+score++;
+scoreText.innerText = score;
 
-let keyboard =
-document.getElementById("keyboard");
+face.style.transform = "scale(1.5)";
+face.style.opacity = "0";
 
-// CREATE KEYS
+setTimeout(()=>{
+face.remove();
+},150);
+}
 
-notes.forEach(note => {
+function spawnFace(){
 
-let key =
-document.createElement("div");
+if(!running) return;
 
-key.className = "key";
+const face = document.createElement("div");
+face.className = "face";
 
-key.innerText = note;
+face.style.left =
+Math.random() * (window.innerWidth - 100) + "px";
 
-key.onclick = () => play(note);
+face.style.top =
+Math.random() * (game.offsetHeight - 100) + "px";
 
-keyboard.appendChild(key);
-
+face.addEventListener("click",()=>{
+cutFace(face);
 });
 
-// PLAY SOUND FUNCTION
+face.addEventListener("touchmove",()=>{
+cutFace(face);
+});
 
-function play(note) {
+game.appendChild(face);
 
-let volume =
-document.getElementById("volume").value;
+setTimeout(()=>{
+if(face.parentNode){
+face.remove();
+}
+},2000);
+}
 
-let audio = new Audio(
-"https://cdn.jsdelivr.net/gh/gleitz/midi-js-soundfonts@master/FluidR3_GM/acoustic_grand_piano-mp3/"
-+ note + ".mp3"
-);
+const spawnInterval =
+setInterval(spawnFace,2000);
 
-audio.volume = volume;
+const timer =
+setInterval(()=>{
 
-audio.play();
+timeLeft--;
+timeText.innerText = timeLeft;
+
+if(timeLeft <= 0){
+
+running = false;
+
+clearInterval(timer);
+clearInterval(spawnInterval);
+
+document.querySelectorAll(".face")
+.forEach(face=>face.remove());
+
+gameover.style.display = "block";
+gameover.innerHTML =
+"GAME OVER<br><br>Score: " + score;
 
 }
 
-// KEYBOARD SUPPORT
-
-document.addEventListener("keydown",
-function(e){
-
-let map = {
-
-"a":"C4",
-"s":"D4",
-"d":"E4",
-"f":"F4",
-"g":"G4",
-"h":"A4",
-"j":"B4"
-
-};
-
-if(map[e.key]) {
-
-play(map[e.key]);
-
-}
-
-});
+},1000);
 
 </script>
 
