@@ -1,175 +1,303 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHIVAM KA GAME</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-body{
-background:#111;
-font-family:Arial,sans-serif;
-color:white;
-text-align:center;
-overflow:hidden;
-}
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-h1{
-padding:10px;
-}
+      background:
+        radial-gradient(circle at 75% 25%, #8b173d 0%, transparent 35%),
+        radial-gradient(circle at 80% 85%, #315ac7 0%, transparent 35%),
+        linear-gradient(135deg, #17132d, #3b102e, #151b45);
 
-#topbar{
-display:flex;
-justify-content:space-around;
-font-size:22px;
-font-weight:bold;
-padding:10px;
-}
+      overflow: hidden;
+    }
 
-#game{
-width:100vw;
-height:85vh;
-background:#222;
-position:relative;
-overflow:hidden;
-}
+    /* Background glow */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: #ff315f;
+      filter: blur(150px);
+      opacity: 0.18;
+      top: -100px;
+      right: 5%;
+    }
 
-.face{
-position:absolute;
-width:90px;
-height:90px;
-border-radius:50%;
-background-image:url('dead-ACPPradyuman-smiling.jpg');
-background-size:cover;
-background-position:center;
-cursor:pointer;
-box-shadow:0 0 12px rgba(255,255,255,.5);
-transition:.15s;
-}
+    body::after {
+      content: "";
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: #467cff;
+      filter: blur(160px);
+      opacity: 0.25;
+      bottom: -180px;
+      right: 5%;
+    }
 
-#gameover{
-display:none;
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:black;
-padding:20px;
-border-radius:10px;
-font-size:28px;
-z-index:999;
-}
-</style>
+    /* Login Box */
+    .login-box {
+      position: relative;
+      z-index: 2;
+
+      width: 420px;
+      padding: 55px 55px 50px;
+
+      border-radius: 45px;
+
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.35),
+        inset 0 1px 1px rgba(255,255,255,0.12);
+    }
+
+    /* Profile Icon */
+    .profile {
+      width: 125px;
+      height: 125px;
+      margin: 0 auto 35px;
+
+      border-radius: 50%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .profile-icon {
+      font-size: 70px;
+      opacity: 0.55;
+      filter: grayscale(1);
+    }
+
+    /* Input */
+    .input-box {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .input-box span {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+
+      font-size: 21px;
+      color: white;
+      opacity: 0.9;
+    }
+
+    .input-box input {
+      width: 100%;
+      height: 48px;
+
+      padding: 0 5px 0 42px;
+
+      border: none;
+      outline: none;
+
+      color: white;
+      font-size: 17px;
+
+      background: transparent;
+
+      border-bottom: 2px solid rgba(255,255,255,0.65);
+    }
+
+    .input-box input::placeholder {
+      color: white;
+      opacity: 0.75;
+    }
+
+    .input-box input:focus {
+      border-bottom-color: #8aa9ff;
+    }
+
+    /* Options */
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin: 8px 0 30px;
+
+      color: white;
+      font-size: 14px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .remember input {
+      width: 18px;
+      height: 18px;
+      accent-color: #526cff;
+    }
+
+    .forgot {
+      color: white;
+      text-decoration: none;
+      opacity: 0.7;
+      font-style: italic;
+    }
+
+    .forgot:hover {
+      opacity: 1;
+    }
+
+    /* Login Button */
+    .login-btn {
+      width: 100%;
+      height: 58px;
+
+      border: none;
+      border-radius: 25px;
+
+      background: linear-gradient(
+        100deg,
+        #6b004f,
+        #3d38b7,
+        #527cff
+      );
+
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 3px;
+
+      cursor: pointer;
+
+      box-shadow: 0 8px 25px rgba(55, 80, 255, 0.25);
+
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(70, 100, 255, 0.4);
+    }
+
+    .login-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Mobile */
+    @media (max-width: 500px) {
+      .login-box {
+        width: 90%;
+        padding: 45px 30px;
+        border-radius: 35px;
+      }
+
+      .profile {
+        width: 105px;
+        height: 105px;
+      }
+
+      .profile-icon {
+        font-size: 60px;
+      }
+
+      .options {
+        font-size: 12px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>SHIVAM KA GAME</h1>
+  <div class="login-box">
 
-<div id="topbar">
-<div>Score: <span id="score">0</span></div>
-<div>Time: <span id="time">30</span></div>
-</div>
+    <div class="profile">
+      <div class="profile-icon">👤</div>
+    </div>
 
-<div id="game">
-<div id="gameover"></div>
-</div>
+    <form onsubmit="login(event)">
 
-<audio id="cutSound" src="Kyu_re_madarchod___CID_Acp_Gaali_Meme__(128k).m4a"></audio>
+      <div class="input-box">
+        <span>✉</span>
+        <input
+          type="email"
+          id="email"
+          placeholder="Email ID"
+          required
+        >
+      </div>
 
-<script>
+      <div class="input-box">
+        <span>🔒</span>
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required
+        >
+      </div>
 
-let score = 0;
-let timeLeft = 30;
-let running = true;
+      <div class="options">
 
-const game = document.getElementById("game");
-const scoreText = document.getElementById("score");
-const timeText = document.getElementById("time");
-const gameover = document.getElementById("gameover");
-const sound = document.getElementById("cutSound");
+        <label class="remember">
+          <input type="checkbox" id="remember">
+          <span>Remember me</span>
+        </label>
 
-function cutFace(face){
+        <a href="#" class="forgot">
+          Forgot Password?
+        </a>
 
-if(!face.parentNode) return;
+      </div>
 
-sound.currentTime = 0;
-sound.play();
+      <button class="login-btn" type="submit">
+        LOGIN
+      </button>
 
-score++;
-scoreText.innerText = score;
+    </form>
 
-face.style.transform = "scale(1.5)";
-face.style.opacity = "0";
+  </div>
 
-setTimeout(()=>{
-face.remove();
-},150);
-}
+  <script>
 
-function spawnFace(){
+    function login(event) {
+      event.preventDefault();
 
-if(!running) return;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
 
-const face = document.createElement("div");
-face.className = "face";
+      if (email && password) {
+        alert("Login button clicked!");
+      }
+    }
 
-face.style.left =
-Math.random() * (window.innerWidth - 100) + "px";
-
-face.style.top =
-Math.random() * (game.offsetHeight - 100) + "px";
-
-face.addEventListener("click",()=>{
-cutFace(face);
-});
-
-face.addEventListener("touchmove",()=>{
-cutFace(face);
-});
-
-game.appendChild(face);
-
-setTimeout(()=>{
-if(face.parentNode){
-face.remove();
-}
-},2000);
-}
-
-const spawnInterval =
-setInterval(spawnFace,2000);
-
-const timer =
-setInterval(()=>{
-
-timeLeft--;
-timeText.innerText = timeLeft;
-
-if(timeLeft <= 0){
-
-running = false;
-
-clearInterval(timer);
-clearInterval(spawnInterval);
-
-document.querySelectorAll(".face")
-.forEach(face=>face.remove());
-
-gameover.style.display = "block";
-gameover.innerHTML =
-"GAME OVER<br><br>Score: " + score;
-
-}
-
-},1000);
-
-</script>
+  </script>
 
 </body>
 </html>
