@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Password Login</title>
 
   <style>
     * {
@@ -27,7 +27,6 @@
       overflow: hidden;
     }
 
-    /* Background glow */
     body::before {
       content: "";
       position: absolute;
@@ -52,13 +51,12 @@
       right: 5%;
     }
 
-    /* Login Box */
     .login-box {
       position: relative;
       z-index: 2;
 
       width: 420px;
-      padding: 55px 55px 50px;
+      padding: 55px;
 
       border-radius: 45px;
 
@@ -73,11 +71,10 @@
         inset 0 1px 1px rgba(255,255,255,0.12);
     }
 
-    /* Profile Icon */
     .profile {
       width: 125px;
       height: 125px;
-      margin: 0 auto 35px;
+      margin: 0 auto 45px;
 
       border-radius: 50%;
 
@@ -86,19 +83,16 @@
       align-items: center;
 
       background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.10);
     }
 
     .profile-icon {
       font-size: 70px;
       opacity: 0.55;
-      filter: grayscale(1);
     }
 
-    /* Input */
     .input-box {
       position: relative;
-      margin-bottom: 32px;
+      margin-bottom: 35px;
     }
 
     .input-box span {
@@ -109,12 +103,11 @@
 
       font-size: 21px;
       color: white;
-      opacity: 0.9;
     }
 
     .input-box input {
       width: 100%;
-      height: 48px;
+      height: 50px;
 
       padding: 0 5px 0 42px;
 
@@ -138,42 +131,6 @@
       border-bottom-color: #8aa9ff;
     }
 
-    /* Options */
-    .options {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      margin: 8px 0 30px;
-
-      color: white;
-      font-size: 14px;
-    }
-
-    .remember {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .remember input {
-      width: 18px;
-      height: 18px;
-      accent-color: #526cff;
-    }
-
-    .forgot {
-      color: white;
-      text-decoration: none;
-      opacity: 0.7;
-      font-style: italic;
-    }
-
-    .forgot:hover {
-      opacity: 1;
-    }
-
-    /* Login Button */
     .login-btn {
       width: 100%;
       height: 58px;
@@ -195,8 +152,6 @@
 
       cursor: pointer;
 
-      box-shadow: 0 8px 25px rgba(55, 80, 255, 0.25);
-
       transition: 0.3s;
     }
 
@@ -209,7 +164,6 @@
       transform: scale(0.97);
     }
 
-    /* Mobile */
     @media (max-width: 500px) {
       .login-box {
         width: 90%;
@@ -225,10 +179,6 @@
       .profile-icon {
         font-size: 60px;
       }
-
-      .options {
-        font-size: 12px;
-      }
     }
   </style>
 </head>
@@ -243,37 +193,16 @@
 
     <form onsubmit="login(event)">
 
-      <div class="input-box">
-        <span>✉</span>
-        <input
-          type="email"
-          id="email"
-          placeholder="Email ID"
-          required
-        >
-      </div>
-
+      <!-- Only Password -->
       <div class="input-box">
         <span>🔒</span>
+
         <input
           type="password"
           id="password"
           placeholder="Password"
           required
         >
-      </div>
-
-      <div class="options">
-
-        <label class="remember">
-          <input type="checkbox" id="remember">
-          <span>Remember me</span>
-        </label>
-
-        <a href="#" class="forgot">
-          Forgot Password?
-        </a>
-
       </div>
 
       <button class="login-btn" type="submit">
@@ -289,12 +218,13 @@
     function login(event) {
       event.preventDefault();
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const password =
+        document.getElementById("password").value;
 
-      if (email && password) {
+      if (password) {
         alert("Login button clicked!");
       }
+
     }
 
   </script>
