@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1K Likes Gaming UI</title>
+<title>1K Likes - Gaming</title>
 
 <style>
 *{
@@ -14,91 +14,125 @@
 
 body{
     min-height:100vh;
-    background:
-      radial-gradient(circle at 20% 30%, #001d55 0%, transparent 35%),
-      radial-gradient(circle at 80% 30%, #62001f 0%, transparent 35%),
-      linear-gradient(135deg,#03070f,#08030b,#020914);
     color:white;
-    font-family:Arial, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 20% 25%,#002b63 0%,transparent 32%),
+        radial-gradient(circle at 80% 25%,#610020 0%,transparent 32%),
+        radial-gradient(circle at 50% 80%,#001c3c 0%,transparent 40%),
+        #020308;
     overflow-x:hidden;
 }
 
+/* Background grid */
 body::before{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
-    background:
-      linear-gradient(115deg,transparent 48%,rgba(0,130,255,.12) 49%,transparent 50%),
-      linear-gradient(65deg,transparent 48%,rgba(255,0,55,.10) 49%,transparent 50%);
-    background-size:90px 90px;
+    opacity:.35;
+    background-image:
+        linear-gradient(rgba(0,140,255,.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,0,60,.06) 1px,transparent 1px);
+    background-size:45px 45px;
 }
 
+/* TOP */
 .header{
     text-align:center;
-    padding:38px 15px 20px;
+    padding:35px 15px 20px;
 }
 
 .header h1{
-    font-size:clamp(48px,13vw,95px);
+    font-size:clamp(48px,14vw,90px);
     font-weight:1000;
     font-style:italic;
     letter-spacing:-5px;
-    background:linear-gradient(90deg,#00c8ff,#fff,#ff304f);
+
+    background:linear-gradient(
+        90deg,
+        #00c8ff,
+        #ffffff,
+        #ff3155
+    );
+
     -webkit-background-clip:text;
+    background-clip:text;
     color:transparent;
-    text-shadow:0 0 25px rgba(0,170,255,.5);
+
+    text-shadow:
+        0 0 20px rgba(0,170,255,.4),
+        0 0 30px rgba(255,0,70,.2);
 }
 
 .header p{
-    letter-spacing:8px;
-    font-size:15px;
-    color:#ddd;
+    margin-top:5px;
+    color:#aaa;
+    font-size:12px;
+    letter-spacing:7px;
 }
 
+/* CARD */
 .card{
-    width:min(90%,720px);
-    margin:30px auto;
-    padding:35px 25px 45px;
     position:relative;
+    width:min(90%,650px);
+    margin:25px auto 30px;
+    padding:32px 22px 42px;
 
-    background:rgba(5,10,20,.88);
-    border:2px solid transparent;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,35,65,.35),
+            rgba(5,5,12,.96),
+            rgba(60,0,20,.35)
+        );
+
+    border:1px solid rgba(0,160,255,.7);
     border-radius:12px;
 
     box-shadow:
-      0 0 25px rgba(0,130,255,.3),
-      0 0 35px rgba(255,0,60,.2);
+        0 0 25px rgba(0,130,255,.25),
+        0 0 40px rgba(255,0,60,.18),
+        inset 0 0 30px rgba(0,100,255,.05);
 
     overflow:hidden;
 }
 
-.card::before{
+.card::after{
     content:"";
     position:absolute;
-    inset:0;
-    border-radius:12px;
-    padding:2px;
-    background:linear-gradient(90deg,#009dff,#111,#ff174b);
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
-    pointer-events:none;
+    top:0;
+    left:-100%;
+    width:50%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.08),
+        transparent
+    );
+    transform:skewX(-20deg);
+    animation:shine 5s infinite;
 }
 
+@keyframes shine{
+    0%,70%{left:-100%}
+    100%{left:150%}
+}
+
+/* OFFER */
 .offer{
     text-align:center;
-    color:#ff4862;
+    color:#ff4162;
+    font-size:12px;
     letter-spacing:5px;
-    font-size:14px;
-    margin-bottom:35px;
+    margin-bottom:30px;
 }
 
+/* TITLE */
 .title{
     text-align:center;
-    font-size:clamp(32px,8vw,58px);
+    font-size:clamp(30px,8vw,55px);
     font-weight:1000;
     font-style:italic;
 }
@@ -110,130 +144,231 @@ body::before{
 
 .instant{
     text-align:center;
-    font-size:clamp(45px,10vw,75px);
+    margin-top:2px;
+    margin-bottom:30px;
+
+    font-size:clamp(43px,11vw,70px);
     font-weight:1000;
     font-style:italic;
+
     color:#ff304f;
-    text-shadow:0 0 18px rgba(255,0,50,.6);
-    margin-bottom:30px;
+    text-shadow:
+        0 0 10px #ff1744,
+        0 0 25px rgba(255,0,50,.45);
 }
 
+/* AVATAR */
 .avatar{
-    width:155px;
-    height:155px;
-    margin:15px auto 25px;
+    width:145px;
+    height:145px;
+    margin:10px auto 25px;
+
     border-radius:50%;
+
     display:flex;
     align-items:center;
     justify-content:center;
 
-    font-size:70px;
-    background:radial-gradient(circle,#00c8ff,#0060b8,#071322);
-    border:5px solid #00aaff;
+    font-size:65px;
+
+    background:
+        radial-gradient(
+            circle,
+            #008dff,
+            #004e9e 50%,
+            #020b18 72%
+        );
+
+    border:4px solid #00aaff;
+
     box-shadow:
-      0 0 20px #008cff,
-      0 0 45px rgba(0,150,255,.5);
+        0 0 15px #008cff,
+        0 0 35px rgba(0,150,255,.55);
+
+    animation:pulse 2s infinite;
 }
 
+@keyframes pulse{
+    50%{
+        box-shadow:
+        0 0 25px #008cff,
+        0 0 55px rgba(0,150,255,.65);
+    }
+}
+
+/* LIKES */
 .likes{
     width:75%;
     margin:auto;
-    padding:15px;
+    padding:14px;
+
     text-align:center;
+
     border:2px solid #087cff;
     border-radius:10px;
-    background:linear-gradient(90deg,#03172c,#080b16);
-    font-size:30px;
+
+    background:#030a15;
+
+    font-size:29px;
     font-weight:bold;
-    box-shadow:0 0 15px rgba(0,140,255,.35);
+
+    box-shadow:0 0 18px rgba(0,130,255,.3);
 }
 
 .likes small{
     display:block;
-    font-size:12px;
+    margin-top:3px;
+
+    font-size:11px;
     letter-spacing:5px;
     color:#00bfff;
 }
 
+/* TOKEN */
 label{
     display:block;
-    margin:35px 0 8px;
-    color:#ddd;
+    margin:30px 0 8px;
+
+    color:#ccc;
+    font-size:13px;
     letter-spacing:3px;
-    font-size:14px;
 }
 
 .input{
     width:100%;
-    padding:18px;
-    border:1px solid #087cff;
+    padding:17px;
+
+    color:#ddd;
+    background:#02060d;
+
+    border:1px solid #176bba;
     border-radius:8px;
-    background:#030812;
-    color:#aaa;
+
     outline:none;
-    font-size:16px;
+    font-size:15px;
+
+    transition:.2s;
 }
 
 .input:focus{
     border-color:#ff3154;
-    box-shadow:0 0 15px rgba(255,0,70,.3);
+    box-shadow:0 0 15px rgba(255,0,70,.25);
 }
 
+/* OPEN BUTTON */
 .open{
-    width:75%;
-    margin:35px auto 0;
+    position:relative;
+
+    width:78%;
+    margin:30px auto 0;
     display:block;
-    padding:20px;
+
+    padding:18px;
+
     border:2px solid #00aaff;
     border-radius:50px;
 
-    background:linear-gradient(90deg,#007cff,#9d00ff,#ff174b);
+    background:
+        linear-gradient(
+            90deg,
+            #007cff,
+            #7d00ff,
+            #ff174b
+        );
+
     color:white;
-    font-size:27px;
+
+    font-size:25px;
     font-weight:1000;
     letter-spacing:8px;
+
     cursor:pointer;
 
     box-shadow:
-      0 0 20px rgba(0,130,255,.6),
-      0 0 25px rgba(255,0,70,.4);
+        0 0 18px rgba(0,130,255,.55),
+        0 0 25px rgba(255,0,70,.35);
 
     transition:.2s;
 }
 
 .open:hover{
-    transform:scale(1.04);
-    filter:brightness(1.25);
+    transform:scale(1.035);
+    filter:brightness(1.2);
 }
 
 .open:active{
-    transform:scale(.97);
+    transform:scale(.96);
 }
 
+/* SUCCESS MESSAGE */
+.success{
+    display:none;
+
+    width:90%;
+    margin:20px auto 0;
+    padding:13px;
+
+    text-align:center;
+
+    color:#00eaff;
+    background:rgba(0,120,255,.08);
+
+    border:1px solid #008cff;
+    border-radius:8px;
+
+    font-size:13px;
+    letter-spacing:1px;
+
+    box-shadow:0 0 15px rgba(0,140,255,.2);
+
+    animation:show .35s ease;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* FOOTER */
 .footer{
     width:min(95%,850px);
-    margin:30px auto;
-    display:flex;
-    justify-content:space-around;
-    gap:10px;
-    flex-wrap:wrap;
-    padding:20px 10px;
+    margin:25px auto 40px;
 
-    border-top:1px solid #17304e;
-    border-bottom:1px solid #401323;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+
+    padding:18px 5px;
+
+    border-top:1px solid #123451;
+    border-bottom:1px solid #3b1422;
 
     color:#aaa;
+    font-size:11px;
     letter-spacing:2px;
-    font-size:12px;
 }
 
 .footer div{
-    padding:8px 15px;
+    padding:7px 12px;
 }
 
+/* MOBILE */
 @media(max-width:500px){
+
+    .header{
+        padding-top:28px;
+    }
+
     .card{
-        padding:30px 18px 35px;
+        width:91%;
+        padding:28px 17px 35px;
     }
 
     .likes,
@@ -241,8 +376,14 @@ label{
         width:90%;
     }
 
+    .avatar{
+        width:125px;
+        height:125px;
+        font-size:55px;
+    }
+
     .footer{
-        font-size:10px;
+        font-size:9px;
     }
 }
 </style>
@@ -250,11 +391,13 @@ label{
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
     <h1>1K LIKES</h1>
     <p>UNLOCK REWARD</p>
 </div>
 
+<!-- MAIN CARD -->
 <div class="card">
 
     <div class="offer">
@@ -278,9 +421,10 @@ label{
         <small>LIKES</small>
     </div>
 
-    <label>🔒 &nbsp; ACCESS TOKEN</label>
+    <label>
+        🔒 &nbsp; ACCESS TOKEN
+    </label>
 
-    <!-- Demo-only field: data is NOT sent anywhere -->
     <input
         class="input"
         type="password"
@@ -288,12 +432,17 @@ label{
         autocomplete="off"
     >
 
-    <button class="open" onclick="demoOpen()">
+    <button class="open" onclick="openDemo()">
         GET
     </button>
 
+    <div class="success" id="success">
+        ✓  TOKEN WAS SENT
+    </div>
+
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
     <div>🛡️ 100% SAFE</div>
     <div>⚡ INSTANT DELIVERY</div>
@@ -301,8 +450,15 @@ label{
 </div>
 
 <script>
-function demoOpen(){
-    alert("Demo page — no token was collected or sent.");
+function openDemo(){
+
+    const message = document.getElementById("success");
+
+    message.style.display = "block";
+
+    message.innerHTML =
+        "✓ DEMO ACTIVATED — NO TOKEN WAS SENT";
+
 }
 </script>
 
