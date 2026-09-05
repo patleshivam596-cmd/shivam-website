@@ -1,233 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Password Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
 
-      background:
-        radial-gradient(circle at 75% 25%, #8b173d 0%, transparent 35%),
-        radial-gradient(circle at 80% 85%, #315ac7 0%, transparent 35%),
-        linear-gradient(135deg, #17132d, #3b102e, #151b45);
+    background:
+        radial-gradient(circle at 70% 25%, #b3004f 0%, transparent 35%),
+        radial-gradient(circle at 65% 90%, #075cff 0%, transparent 38%),
+        #211027;
+}
 
-      overflow: hidden;
-    }
+.login-box {
+    width: 300px;
+    padding: 32px 38px 40px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+}
 
-    body::before {
-      content: "";
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      background: #ff315f;
-      filter: blur(150px);
-      opacity: 0.18;
-      top: -100px;
-      right: 5%;
-    }
+/* HEADING */
+.heading {
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+}
 
-    body::after {
-      content: "";
-      position: absolute;
-      width: 450px;
-      height: 450px;
-      background: #467cff;
-      filter: blur(160px);
-      opacity: 0.25;
-      bottom: -180px;
-      right: 5%;
-    }
+/* LOGO */
+.logo {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+}
 
-    .login-box {
-      position: relative;
-      z-index: 2;
+/* INPUT */
+.input-box {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid rgba(255,255,255,0.7);
+    padding: 5px 2px;
+    margin-bottom: 24px;
+}
 
-      width: 420px;
-      padding: 55px;
+.input-box span {
+    margin-right: 8px;
+}
 
-      border-radius: 45px;
+.input-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-size: 13px;
+}
 
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+.input-box input::placeholder {
+    color: rgba(255,255,255,0.75);
+}
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.35),
-        inset 0 1px 1px rgba(255,255,255,0.12);
-    }
-
-    .profile {
-      width: 125px;
-      height: 125px;
-      margin: 0 auto 45px;
-
-      border-radius: 50%;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      background: rgba(255,255,255,0.12);
-    }
-
-    .profile-icon {
-      font-size: 70px;
-      opacity: 0.55;
-    }
-
-    .input-box {
-      position: relative;
-      margin-bottom: 35px;
-    }
-
-    .input-box span {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-
-      font-size: 21px;
-      color: white;
-    }
-
-    .input-box input {
-      width: 100%;
-      height: 50px;
-
-      padding: 0 5px 0 42px;
-
-      border: none;
-      outline: none;
-
-      color: white;
-      font-size: 17px;
-
-      background: transparent;
-
-      border-bottom: 2px solid rgba(255,255,255,0.65);
-    }
-
-    .input-box input::placeholder {
-      color: white;
-      opacity: 0.75;
-    }
-
-    .input-box input:focus {
-      border-bottom-color: #8aa9ff;
-    }
-
-    .login-btn {
-      width: 100%;
-      height: 58px;
-
-      border: none;
-      border-radius: 25px;
-
-      background: linear-gradient(
-        100deg,
-        #6b004f,
-        #3d38b7,
-        #527cff
-      );
-
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      letter-spacing: 3px;
-
-      cursor: pointer;
-
-      transition: 0.3s;
-    }
-
-    .login-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(70, 100, 255, 0.4);
-    }
-
-    .login-btn:active {
-      transform: scale(0.97);
-    }
-
-    @media (max-width: 500px) {
-      .login-box {
-        width: 90%;
-        padding: 45px 30px;
-        border-radius: 35px;
-      }
-
-      .profile {
-        width: 105px;
-        height: 105px;
-      }
-
-      .profile-icon {
-        font-size: 60px;
-      }
-    }
-  </style>
+/* BUTTON */
+button {
+    width: 100%;
+    height: 42px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, #b0008c, #397cff);
+    cursor: pointer;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="login-box">
+<div class="login-box">
 
-    <div class="profile">
-      <div class="profile-icon">👤</div>
+    <!-- Heading -->
+    <div class="heading">YOUR HEADING</div>
+
+    <!-- Logo -->
+    <div class="logo">👤</div>
+
+    <!-- Access Token -->
+    <div class="input-box">
+        <span>🔒</span>
+        <input type="password" placeholder="Access Token">
     </div>
 
-    <form onsubmit="login(event)">
+    <!-- Button -->
+    <button>OPEN</button>
 
-      <!-- Only Password -->
-      <div class="input-box">
-        <span>🔒</span>
-
-        <input
-          type="password"
-          id="password"
-          placeholder="Access Token"
-          required
-        >
-      </div>
-
-      <button class="login-btn" type="submit">
-          OPEN
-      </button>
-
-    </form>
-
-  </div>
-
-  <script>
-
-    function login(event) {
-      event.preventDefault();
-
-      const password =
-        document.getElementById("password").value;
-
-      if (password) {
-        alert("Login button clicked!");
-      }
-
-    }
-
-  </script>
+</div>
 
 </body>
 </html>
