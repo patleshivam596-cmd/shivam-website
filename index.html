@@ -2,464 +2,581 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1K Likes - Gaming</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>1K Likes Gaming</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-    min-height:100vh;
-    color:white;
-    font-family:Arial,Helvetica,sans-serif;
-    background:
-        radial-gradient(circle at 20% 25%,#002b63 0%,transparent 32%),
-        radial-gradient(circle at 80% 25%,#610020 0%,transparent 32%),
-        radial-gradient(circle at 50% 80%,#001c3c 0%,transparent 40%),
-        #020308;
-    overflow-x:hidden;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 15% 20%,#06356b55,transparent 30%),
+    radial-gradient(circle at 85% 30%,#7a004855,transparent 32%),
+    linear-gradient(145deg,#05060b,#090b14 55%,#030409);
+  overflow-x:hidden;
 }
 
-/* Background grid */
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    opacity:.35;
-    background-image:
-        linear-gradient(rgba(0,140,255,.08) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,0,60,.06) 1px,transparent 1px);
-    background-size:45px 45px;
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background-image:
+    linear-gradient(#ffffff08 1px,transparent 1px),
+    linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+  background-size:42px 42px;
 }
 
-/* TOP */
-.header{
-    text-align:center;
-    padding:35px 15px 20px;
+/* NAVBAR */
+.nav{
+  height:68px;
+  padding:0 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#07080dcc;
+  border-bottom:1px solid #ffffff12;
+  backdrop-filter:blur(15px);
 }
 
-.header h1{
-    font-size:clamp(48px,14vw,90px);
-    font-weight:1000;
-    font-style:italic;
-    letter-spacing:-5px;
-
-    background:linear-gradient(
-        90deg,
-        #00c8ff,
-        #ffffff,
-        #ff3155
-    );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-
-    text-shadow:
-        0 0 20px rgba(0,170,255,.4),
-        0 0 30px rgba(255,0,70,.2);
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  letter-spacing:2px;
 }
 
-.header p{
-    margin-top:5px;
-    color:#aaa;
-    font-size:12px;
-    letter-spacing:7px;
+.logoIcon{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:linear-gradient(135deg,#00baff,#743cff);
+  box-shadow:0 0 20px #007dff66;
+}
+
+.online{
+  color:#7d8495;
+  font-size:9px;
+  letter-spacing:2px;
+}
+
+.online i{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  margin-right:6px;
+  border-radius:50%;
+  background:#00e79a;
+  box-shadow:0 0 10px #00e79a;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:48px 20px 25px;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 14px;
+  border:1px solid #00bfff44;
+  border-radius:30px;
+  color:#65d9ff;
+  background:#00aaff0b;
+  font-size:9px;
+  letter-spacing:3px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:clamp(48px,14vw,78px);
+  line-height:.9;
+  font-style:italic;
+  font-weight:1000;
+  letter-spacing:-4px;
+}
+
+.hero h1 span{
+  background:linear-gradient(90deg,#00d9ff,#7955ff,#ff3d86);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  margin-top:17px;
+  color:#737b8e;
+  font-size:12px;
 }
 
 /* CARD */
 .card{
-    position:relative;
-    width:min(90%,650px);
-    margin:25px auto 30px;
-    padding:32px 22px 42px;
+  width:min(92%,460px);
+  margin:20px auto 45px;
+  padding:24px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(0,35,65,.35),
-            rgba(5,5,12,.96),
-            rgba(60,0,20,.35)
-        );
+  background:linear-gradient(
+    145deg,
+    #151a29e8,
+    #080a12f5
+  );
 
-    border:1px solid rgba(0,160,255,.7);
-    border-radius:12px;
+  border:1px solid #ffffff14;
+  border-radius:24px;
 
-    box-shadow:
-        0 0 25px rgba(0,130,255,.25),
-        0 0 40px rgba(255,0,60,.18),
-        inset 0 0 30px rgba(0,100,255,.05);
+  box-shadow:
+    0 25px 70px #000b,
+    0 0 45px #006eff12;
 
-    overflow:hidden;
+  backdrop-filter:blur(20px);
 }
 
-.card::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:50%;
-    height:100%;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.08),
-        transparent
-    );
-    transform:skewX(-20deg);
-    animation:shine 5s infinite;
+/* CARD TOP */
+.cardTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
 }
 
-@keyframes shine{
-    0%,70%{left:-100%}
-    100%{left:150%}
+.cardTop span:first-child{
+  color:#777f92;
+  font-size:10px;
+  letter-spacing:2px;
 }
 
-/* OFFER */
-.offer{
-    text-align:center;
-    color:#ff4162;
-    font-size:12px;
-    letter-spacing:5px;
-    margin-bottom:30px;
+.active{
+  padding:5px 9px;
+  border-radius:6px;
+  color:#00e29a;
+  background:#00e29a0d;
+  border:1px solid #00e29a22;
+  font-size:8px;
+  letter-spacing:1px;
 }
 
-/* TITLE */
-.title{
-    text-align:center;
-    font-size:clamp(30px,8vw,55px);
-    font-weight:1000;
-    font-style:italic;
+/* COUNTER */
+.counter{
+  padding:23px;
+  text-align:center;
+  border-radius:18px;
+  background:linear-gradient(135deg,#009dff0e,#8b4cff0c);
+  border:1px solid #009dff25;
 }
 
-.title span{
-    color:#00c8ff;
-    text-shadow:0 0 15px #008cff;
+.likeIcon{
+  font-size:32px;
+  filter:drop-shadow(0 0 12px #00bfff);
 }
 
-.instant{
-    text-align:center;
-    margin-top:2px;
-    margin-bottom:30px;
-
-    font-size:clamp(43px,11vw,70px);
-    font-weight:1000;
-    font-style:italic;
-
-    color:#ff304f;
-    text-shadow:
-        0 0 10px #ff1744,
-        0 0 25px rgba(255,0,50,.45);
+.number{
+  margin-top:5px;
+  font-size:47px;
+  font-weight:900;
+  letter-spacing:-2px;
 }
 
-/* AVATAR */
-.avatar{
-    width:145px;
-    height:145px;
-    margin:10px auto 25px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:65px;
-
-    background:
-        radial-gradient(
-            circle,
-            #008dff,
-            #004e9e 50%,
-            #020b18 72%
-        );
-
-    border:4px solid #00aaff;
-
-    box-shadow:
-        0 0 15px #008cff,
-        0 0 35px rgba(0,150,255,.55);
-
-    animation:pulse 2s infinite;
+.likesText{
+  color:#687286;
+  font-size:9px;
+  letter-spacing:5px;
 }
 
-@keyframes pulse{
-    50%{
-        box-shadow:
-        0 0 25px #008cff,
-        0 0 55px rgba(0,150,255,.65);
-    }
+/* PROGRESS */
+.progressInfo{
+  display:flex;
+  justify-content:space-between;
+  margin:20px 0 7px;
+  color:#737b8d;
+  font-size:9px;
 }
 
-/* LIKES */
-.likes{
-    width:75%;
-    margin:auto;
-    padding:14px;
-
-    text-align:center;
-
-    border:2px solid #087cff;
-    border-radius:10px;
-
-    background:#030a15;
-
-    font-size:29px;
-    font-weight:bold;
-
-    box-shadow:0 0 18px rgba(0,130,255,.3);
+.progress{
+  height:5px;
+  background:#1b2030;
+  border-radius:10px;
+  overflow:hidden;
 }
 
-.likes small{
-    display:block;
-    margin-top:3px;
-
-    font-size:11px;
-    letter-spacing:5px;
-    color:#00bfff;
+.progressBar{
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,#00c8ff,#754cff,#ff3980);
+  box-shadow:0 0 12px #008cff;
 }
 
-/* TOKEN */
-label{
-    display:block;
-    margin:30px 0 8px;
-
-    color:#ccc;
-    font-size:13px;
-    letter-spacing:3px;
+/* INPUT */
+.field{
+  margin-top:23px;
 }
 
-.input{
-    width:100%;
-    padding:17px;
-
-    color:#ddd;
-    background:#02060d;
-
-    border:1px solid #176bba;
-    border-radius:8px;
-
-    outline:none;
-    font-size:15px;
-
-    transition:.2s;
+.fieldHeader{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
 }
 
-.input:focus{
-    border-color:#ff3154;
-    box-shadow:0 0 15px rgba(255,0,70,.25);
+.fieldHeader span:first-child{
+  color:#aeb6c7;
+  font-size:10px;
+  letter-spacing:1.5px;
 }
 
-/* OPEN BUTTON */
+.demo{
+  color:#555e72;
+  font-size:8px;
+}
+
+.inputBox{
+  position:relative;
+}
+
+.inputBox .lock{
+  position:absolute;
+  left:15px;
+  top:50%;
+  transform:translateY(-50%);
+  opacity:.6;
+}
+
+input{
+  width:100%;
+  height:52px;
+  padding:0 44px;
+
+  color:white;
+  background:#05070d;
+
+  border:1px solid #252b3a;
+  border-radius:12px;
+  outline:none;
+
+  font-size:13px;
+  transition:.2s;
+}
+
+input:focus{
+  border-color:#008cff;
+  box-shadow:0 0 0 3px #008cff12;
+}
+
+input.error{
+  border-color:#ff3e62;
+  box-shadow:0 0 0 3px #ff315412;
+}
+
+/* EYE */
+.eye{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:none;
+  color:#667085;
+  cursor:pointer;
+}
+
+/* BUTTON */
 .open{
-    position:relative;
+  width:100%;
+  height:55px;
+  margin-top:18px;
 
-    width:78%;
-    margin:30px auto 0;
-    display:block;
+  border:0;
+  border-radius:13px;
 
-    padding:18px;
+  color:white;
+  background:linear-gradient(90deg,#008cff,#654cff,#bd2fff);
 
-    border:2px solid #00aaff;
-    border-radius:50px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:3px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #007cff,
-            #7d00ff,
-            #ff174b
-        );
-
-    color:white;
-
-    font-size:25px;
-    font-weight:1000;
-    letter-spacing:8px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 0 18px rgba(0,130,255,.55),
-        0 0 25px rgba(255,0,70,.35);
-
-    transition:.2s;
+  cursor:pointer;
+  box-shadow:0 12px 30px #4b54ff2b;
+  transition:.2s;
 }
 
 .open:hover{
-    transform:scale(1.035);
-    filter:brightness(1.2);
+  transform:translateY(-2px);
+  filter:brightness(1.12);
 }
 
 .open:active{
-    transform:scale(.96);
+  transform:scale(.98);
 }
 
-/* SUCCESS MESSAGE */
-.success{
-    display:none;
-
-    width:90%;
-    margin:20px auto 0;
-    padding:13px;
-
-    text-align:center;
-
-    color:#00eaff;
-    background:rgba(0,120,255,.08);
-
-    border:1px solid #008cff;
-    border-radius:8px;
-
-    font-size:13px;
-    letter-spacing:1px;
-
-    box-shadow:0 0 15px rgba(0,140,255,.2);
-
-    animation:show .35s ease;
+/* MESSAGE */
+.message{
+  display:none;
+  margin-top:13px;
+  padding:12px;
+  text-align:center;
+  border-radius:10px;
+  font-size:10px;
+  letter-spacing:1px;
 }
 
-@keyframes show{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.message.warning{
+  display:block;
+  color:#ffbf55;
+  background:#ffae0010;
+  border:1px solid #ffae0030;
+}
+
+.message.success{
+  display:block;
+  color:#00dfa0;
+  background:#00dfa00d;
+  border:1px solid #00dfa030;
+}
+
+/* FEATURES */
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:20px;
+}
+
+.feature{
+  padding:13px 5px;
+  text-align:center;
+  border:1px solid #ffffff09;
+  background:#ffffff03;
+  border-radius:12px;
+}
+
+.feature b{
+  display:block;
+  font-size:17px;
+  margin-bottom:5px;
+}
+
+.feature span{
+  color:#656e82;
+  font-size:7px;
+  letter-spacing:1px;
 }
 
 /* FOOTER */
-.footer{
-    width:min(95%,850px);
-    margin:25px auto 40px;
-
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:10px;
-
-    padding:18px 5px;
-
-    border-top:1px solid #123451;
-    border-bottom:1px solid #3b1422;
-
-    color:#aaa;
-    font-size:11px;
-    letter-spacing:2px;
+footer{
+  text-align:center;
+  padding-bottom:30px;
+  color:#424a5b;
+  font-size:8px;
+  letter-spacing:2px;
 }
 
-.footer div{
-    padding:7px 12px;
-}
+@media(max-width:480px){
+  .card{
+    padding:19px;
+  }
 
-/* MOBILE */
-@media(max-width:500px){
+  .hero{
+    padding-top:40px;
+  }
 
-    .header{
-        padding-top:28px;
-    }
-
-    .card{
-        width:91%;
-        padding:28px 17px 35px;
-    }
-
-    .likes,
-    .open{
-        width:90%;
-    }
-
-    .avatar{
-        width:125px;
-        height:125px;
-        font-size:55px;
-    }
-
-    .footer{
-        font-size:9px;
-    }
+  .number{
+    font-size:42px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-    <h1>1K LIKES</h1>
-    <p>UNLOCK REWARD</p>
-</div>
+<nav class="nav">
 
-<!-- MAIN CARD -->
+  <div class="logo">
+    <div class="logoIcon">⚡</div>
+    LIKEBOOST
+  </div>
+
+  <div class="online">
+    <i></i>SYSTEM ONLINE
+  </div>
+
+</nav>
+
+
+<section class="hero">
+
+  <div class="badge">
+    GAMING REWARD SYSTEM
+  </div>
+
+  <h1>
+    GET <span>1K</span><br>LIKES
+  </h1>
+
+  <p>Fast • Simple • Mobile Optimized</p>
+
+</section>
+
+
 <div class="card">
 
-    <div class="offer">
-        &lt; LIMITED OFFER &gt;
+  <div class="cardTop">
+    <span>REWARD STATUS</span>
+    <div class="active">● ACTIVE</div>
+  </div>
+
+
+  <div class="counter">
+
+    <div class="likeIcon">👍</div>
+
+    <div class="number">1,000</div>
+
+    <div class="likesText">LIKES</div>
+
+  </div>
+
+
+  <div class="progressInfo">
+    <span>REWARD PROGRESS</span>
+    <span>100%</span>
+  </div>
+
+  <div class="progress">
+    <div class="progressBar"></div>
+  </div>
+
+
+  <div class="field">
+
+    <div class="fieldHeader">
+      <span>🔒 ACCESS TOKEN</span>
+      <span class="demo">DEMO UI</span>
     </div>
 
-    <div class="title">
-        GET <span>1K</span> LIKE
-    </div>
+    <div class="inputBox">
 
-    <div class="instant">
-        INSTANT
-    </div>
+      <span class="lock">🔒</span>
 
-    <div class="avatar">
-        👤
-    </div>
-
-    <div class="likes">
-         &nbsp;1,000
-        <small>LIKES</small>
-    </div>
-
-    <label>
-        🔒 &nbsp; ACCESS TOKEN
-    </label>
-
-    <input
-        class="input"
+      <input
+        id="token"
         type="password"
-        placeholder="Enter token"
+        placeholder="Enter access token"
         autocomplete="off"
-    >
+      >
 
-    <button class="open" onclick="openDemo()">
-        GET
-    </button>
+      <button
+        class="eye"
+        type="button"
+        onclick="toggleToken()">
+        ◉
+      </button>
 
-    <div class="success" id="success">
-        ✓  TOKEN WAS SENT
     </div>
 
+  </div>
+
+
+  <button
+    class="open"
+    type="button"
+    onclick="openReward()">
+
+    OPEN REWARD
+
+  </button>
+
+
+  <div id="message" class="message"></div>
+
+
+  <div class="features">
+
+    <div class="feature">
+      <b>🛡️</b>
+      <span>SECURE UI</span>
+    </div>
+
+    <div class="feature">
+      <b>⚡</b>
+      <span>FAST ACCESS</span>
+    </div>
+
+    <div class="feature">
+      <b>●</b>
+      <span>ONLINE</span>
+    </div>
+
+  </div>
+
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-    <div>🛡️ 100% SAFE</div>
-    <div>⚡ INSTANT DELIVERY</div>
-    <div>🎯 WORKING</div>
-</div>
+
+<footer>
+  LIKEBOOST • DEMO INTERFACE • 2026
+</footer>
+
 
 <script>
-function openDemo(){
 
-    const message = document.getElementById("success");
+function toggleToken(){
 
-    message.style.display = "block";
+  const input = document.getElementById("token");
+
+  input.type =
+    input.type === "password"
+    ? "text"
+    : "password";
+}
+
+
+function openReward(){
+
+  const input =
+    document.getElementById("token");
+
+  const message =
+    document.getElementById("message");
+
+
+  /* EMPTY TOKEN */
+
+  if(input.value.trim() === ""){
+
+    input.classList.add("error");
+
+    message.className =
+      "message warning";
 
     message.innerHTML =
-        "✓ DEMO ACTIVATED — NO TOKEN WAS SENT";
+      "⚠ PLEASE ENTER YOUR ACCESS TOKEN FIRST";
+
+    input.focus();
+
+    return;
+  }
+
+
+  /* TEXT ENTERED — DEMO ONLY */
+
+  input.classList.remove("error");
+
+  message.className =
+    "message success";
+
+  message.innerHTML =
+    "✓ SUCCESS — ACCESS TOKEN FIELD COMPLETED";
 
 }
+
 </script>
 
 </body>
