@@ -3,120 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1K Likes Gaming UI</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-
+body{
+    min-height:100vh;
     background:
-        radial-gradient(circle at 70% 25%, #b3004f 0%, transparent 35%),
-        radial-gradient(circle at 65% 90%, #075cff 0%, transparent 38%),
-        #211027;
+      radial-gradient(circle at 20% 30%, #001d55 0%, transparent 35%),
+      radial-gradient(circle at 80% 30%, #62001f 0%, transparent 35%),
+      linear-gradient(135deg,#03070f,#08030b,#020914);
+    color:white;
+    font-family:Arial, sans-serif;
+    overflow-x:hidden;
 }
 
-.login-box {
-    width: 300px;
-    padding: 32px 38px 40px;
-    border-radius: 30px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,0.12);
-    text-align: center;
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+      linear-gradient(115deg,transparent 48%,rgba(0,130,255,.12) 49%,transparent 50%),
+      linear-gradient(65deg,transparent 48%,rgba(255,0,55,.10) 49%,transparent 50%);
+    background-size:90px 90px;
 }
 
-/* HEADING */
-.heading {
-    color: white;
-    font-size: 22px;
-    font-weight: 700;
-    margin: 0 0 20px 0;
-    letter-spacing: 1px;
+.header{
+    text-align:center;
+    padding:38px 15px 20px;
 }
 
-/* LOGO */
-.logo {
-    width: 88px;
-    height: 88px;
-    margin: 0 auto 38px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.12);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 48px;
+.header h1{
+    font-size:clamp(48px,13vw,95px);
+    font-weight:1000;
+    font-style:italic;
+    letter-spacing:-5px;
+    background:linear-gradient(90deg,#00c8ff,#fff,#ff304f);
+    -webkit-background-clip:text;
+    color:transparent;
+    text-shadow:0 0 25px rgba(0,170,255,.5);
 }
 
-/* INPUT */
-.input-box {
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid rgba(255,255,255,0.7);
-    padding: 5px 2px;
-    margin-bottom: 24px;
+.header p{
+    letter-spacing:8px;
+    font-size:15px;
+    color:#ddd;
 }
 
-.input-box span {
-    margin-right: 8px;
+.card{
+    width:min(90%,720px);
+    margin:30px auto;
+    padding:35px 25px 45px;
+    position:relative;
+
+    background:rgba(5,10,20,.88);
+    border:2px solid transparent;
+    border-radius:12px;
+
+    box-shadow:
+      0 0 25px rgba(0,130,255,.3),
+      0 0 35px rgba(255,0,60,.2);
+
+    overflow:hidden;
 }
 
-.input-box input {
-    width: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: white;
-    font-size: 13px;
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:12px;
+    padding:2px;
+    background:linear-gradient(90deg,#009dff,#111,#ff174b);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
 }
 
-.input-box input::placeholder {
-    color: rgba(255,255,255,0.75);
+.offer{
+    text-align:center;
+    color:#ff4862;
+    letter-spacing:5px;
+    font-size:14px;
+    margin-bottom:35px;
 }
 
-/* BUTTON */
-button {
-    width: 100%;
-    height: 42px;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    font-weight: bold;
-    letter-spacing: 3px;
-    background: linear-gradient(90deg, #b0008c, #397cff);
-    cursor: pointer;
+.title{
+    text-align:center;
+    font-size:clamp(32px,8vw,58px);
+    font-weight:1000;
+    font-style:italic;
+}
+
+.title span{
+    color:#00c8ff;
+    text-shadow:0 0 15px #008cff;
+}
+
+.instant{
+    text-align:center;
+    font-size:clamp(45px,10vw,75px);
+    font-weight:1000;
+    font-style:italic;
+    color:#ff304f;
+    text-shadow:0 0 18px rgba(255,0,50,.6);
+    margin-bottom:30px;
+}
+
+.avatar{
+    width:155px;
+    height:155px;
+    margin:15px auto 25px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:70px;
+    background:radial-gradient(circle,#00c8ff,#0060b8,#071322);
+    border:5px solid #00aaff;
+    box-shadow:
+      0 0 20px #008cff,
+      0 0 45px rgba(0,150,255,.5);
+}
+
+.likes{
+    width:75%;
+    margin:auto;
+    padding:15px;
+    text-align:center;
+    border:2px solid #087cff;
+    border-radius:10px;
+    background:linear-gradient(90deg,#03172c,#080b16);
+    font-size:30px;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(0,140,255,.35);
+}
+
+.likes small{
+    display:block;
+    font-size:12px;
+    letter-spacing:5px;
+    color:#00bfff;
+}
+
+label{
+    display:block;
+    margin:35px 0 8px;
+    color:#ddd;
+    letter-spacing:3px;
+    font-size:14px;
+}
+
+.input{
+    width:100%;
+    padding:18px;
+    border:1px solid #087cff;
+    border-radius:8px;
+    background:#030812;
+    color:#aaa;
+    outline:none;
+    font-size:16px;
+}
+
+.input:focus{
+    border-color:#ff3154;
+    box-shadow:0 0 15px rgba(255,0,70,.3);
+}
+
+.open{
+    width:75%;
+    margin:35px auto 0;
+    display:block;
+    padding:20px;
+    border:2px solid #00aaff;
+    border-radius:50px;
+
+    background:linear-gradient(90deg,#007cff,#9d00ff,#ff174b);
+    color:white;
+    font-size:27px;
+    font-weight:1000;
+    letter-spacing:8px;
+    cursor:pointer;
+
+    box-shadow:
+      0 0 20px rgba(0,130,255,.6),
+      0 0 25px rgba(255,0,70,.4);
+
+    transition:.2s;
+}
+
+.open:hover{
+    transform:scale(1.04);
+    filter:brightness(1.25);
+}
+
+.open:active{
+    transform:scale(.97);
+}
+
+.footer{
+    width:min(95%,850px);
+    margin:30px auto;
+    display:flex;
+    justify-content:space-around;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:20px 10px;
+
+    border-top:1px solid #17304e;
+    border-bottom:1px solid #401323;
+
+    color:#aaa;
+    letter-spacing:2px;
+    font-size:12px;
+}
+
+.footer div{
+    padding:8px 15px;
+}
+
+@media(max-width:500px){
+    .card{
+        padding:30px 18px 35px;
+    }
+
+    .likes,
+    .open{
+        width:90%;
+    }
+
+    .footer{
+        font-size:10px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="header">
+    <h1>1K LIKES</h1>
+    <p>UNLOCK REWARD</p>
+</div>
 
-    <!-- Heading -->
-    <div class="heading">GET 1K LIKE INSTANT</div>
+<div class="card">
 
-    <!-- Logo -->
-    <div class="logo">👤</div>
-
-    <!-- Access Token -->
-    <div class="input-box">
-        <span>🔒</span>
-        <input type="password" placeholder="Access Token">
+    <div class="offer">
+        &lt; LIMITED OFFER &gt;
     </div>
 
-    <!-- Button -->
-    <button>OPEN</button>
+    <div class="title">
+        GET <span>1K</span> LIKE
+    </div>
+
+    <div class="instant">
+        INSTANT
+    </div>
+
+    <div class="avatar">
+        👤
+    </div>
+
+    <div class="likes">
+        👍 &nbsp; 1,000
+        <small>LIKES</small>
+    </div>
+
+    <label>🔒 &nbsp; ACCESS TOKEN</label>
+
+    <!-- Demo-only field: data is NOT sent anywhere -->
+    <input
+        class="input"
+        type="password"
+        placeholder="Enter token (demo only)"
+        autocomplete="off"
+    >
+
+    <button class="open" onclick="demoOpen()">
+        OPEN
+    </button>
 
 </div>
+
+<div class="footer">
+    <div>🛡️ 100% SAFE</div>
+    <div>⚡ INSTANT DELIVERY</div>
+    <div>🎯 WORKING</div>
+</div>
+
+<script>
+function demoOpen(){
+    alert("Demo page — no token was collected or sent.");
+}
+</script>
 
 </body>
 </html>
